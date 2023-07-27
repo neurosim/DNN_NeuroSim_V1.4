@@ -113,7 +113,7 @@ cd DNN_NeuroSim_V1.4
 4. Create conda environemnt from provided environment file
 
 ```
-conda create env --file environment.yml
+conda env create --file environment.yml
 ```
 
 5. Activate neurosim environment
