@@ -4,7 +4,7 @@ The DNN+NeuroSim framework was developed by [Prof. Shimeng Yu's group](https://s
 
 :star2: This is the released version 1.4 (August 1, 2023) for the tool, and this version has **_improved following inference engine estimation_**:
 ```
-1. Support for technology scaling down to 1nm node in hardware estimation framework (C++ code).
+1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).
 
 The following is a list of the supported nodes:
 
@@ -30,7 +30,6 @@ modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
 For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
 
 For additional details about the device parameters used in NeuroSim, refer to section 7 of the V1.4 manual.
-
 ```
 
 2. Add partial parallel mode in python wrapper (for single-level cells only) and C++ code for hardware estimation.
@@ -43,7 +42,6 @@ Partial parallel mode will be enabled in both the python wrapper and C++ code.
 --parallelRead N
 
 Where N is the desired number of rows activated in parallel and N <= sub-array size.
-
 ```
 
 3. XY Bus as an alternative to H-tree interconnect.
@@ -51,7 +49,6 @@ Where N is the desired number of rows activated in parallel and N <= sub-array s
 :point_right: :point_right: :point_right: **In "Param.cpp", to switch interconnect mode:**
 ```
 globalBusType = false;		// false: X-Y Bus      // true: H-Tree
-
 ```
 
 
@@ -96,9 +93,11 @@ If you have logistic questions or comments on the model, please contact :man: [P
 
 ## Installation steps (Linux + Anaconda/Miniconda)
 We have included an Anaconda environment with this version to make package installation easier.
+
 If you don't want to use the conda environment or don't have a CUDA enabled GPU, check the environment.yml file for the versions of all packages used.
 
 This version supports the recently released PyTorch 2.0
+
 We have currently tested the following CUDA drivers:
 
 
@@ -139,7 +138,7 @@ python inference.py
 ```
 
 
-For the usage of this tool, please refer to the manual.
+For additional details on the usage of this tool, please refer to the manual.
 
 
 ## References related to this tool 
