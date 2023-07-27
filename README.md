@@ -3,9 +3,9 @@
 The DNN+NeuroSim framework was developed by [Prof. Shimeng Yu's group](https://shimeng.ece.gatech.edu/) (Georgia Institute of Technology). The model is made publicly available on a non-commercial basis. Copyright of the model is maintained by the developers, and the model is distributed under the terms of the [Creative Commons Attribution-NonCommercial 4.0 International Public License](http://creativecommons.org/licenses/by-nc/4.0/legalcode)
 
 :star2: This is the released version 1.4 (August 1, 2023) for the tool, and this version has **_improved following inference engine estimation_**:
-```
-1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).
 
+**1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).**
+```
 The following is a list of the supported nodes:
 
 130nm
@@ -24,8 +24,7 @@ The following is a list of the supported nodes:
 
 ```
 
-:point_right: :point_right: :point_right: **In "Param.cpp", to pick technology node:**
-```
+**To pick the technology node:**
 modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
 For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
 
