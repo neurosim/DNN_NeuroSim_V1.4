@@ -93,7 +93,7 @@ conda activate neurosim
 
 6b. (Optional) Train the network to get the model for inference
 
-7. Compile the NeuroSim codes
+7. Compile the NeuroSim C++ code
 ```
 cd Inference_pytorch/NeuroSIM
 make
