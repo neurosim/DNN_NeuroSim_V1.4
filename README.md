@@ -4,7 +4,7 @@ The DNN+NeuroSim framework was developed by [Prof. Shimeng Yu's group](https://s
 
 :star2: This is the released version 1.4 (August 1, 2023) for the tool, and this version has **_improved following inference engine estimation_**:
 
-# 1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).
+## 1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).
 ```
 The following is a list of the supported nodes:
 
@@ -23,7 +23,7 @@ The following is a list of the supported nodes:
 1nm   -   IRDS Projection (2021-2022)
 ```
 
-**To select a technology node:**
+### To select a technology node:
 ```
 modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
 For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
@@ -31,9 +31,9 @@ For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds 
 For additional details about the device parameters used in NeuroSim, refer to section 7 of the V1.4 manual.
 ```
 
-2. Add partial parallel mode in python wrapper (for single-level cells only) and C++ code for hardware estimation.
+## 2. Add partial parallel mode in python wrapper (for single-level cells only) and C++ code for hardware estimation.
 
-:point_right: :point_right: :point_right: **To enable partial parallel mode**
+### To enable partial parallel mode
 ```
 Specify the parameter "parallelRead" when running the python wrapper.
 Partial parallel mode will be enabled in both the python wrapper and C++ code.
@@ -43,9 +43,9 @@ Partial parallel mode will be enabled in both the python wrapper and C++ code.
 Where N is the desired number of rows activated in parallel and N <= sub-array size.
 ```
 
-3. XY Bus as an alternative to H-tree interconnect.
+## 3. XY Bus as an alternative to H-tree interconnect.
 
-:point_right: :point_right: :point_right: **In "Param.cpp", to switch interconnect mode:**
+### In "Param.cpp", to switch interconnect mode:
 ```
 globalBusType = false;		// false: X-Y Bus      // true: H-Tree
 ```
