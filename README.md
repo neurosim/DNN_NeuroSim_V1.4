@@ -58,7 +58,8 @@ If you don't want to use the conda environment or don't have a CUDA enabled GPU,
 This version supports the recently released PyTorch 2.0
 
 We have currently tested the following CUDA drivers:
-
+Driver Version: 535.54.03
+CUDA Version: 12.2
 
 1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
 2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
