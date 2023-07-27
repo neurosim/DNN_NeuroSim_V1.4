@@ -81,7 +81,7 @@ conda env create --file environment.yml
 conda activate neurosim
 ```
 
-&nbsp; 6a. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
+6. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
 ```
 1. VGG8 on cifar10 
    8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
@@ -91,15 +91,15 @@ conda activate neurosim
    "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
 ```
 
-&nbsp; 6b. (Optional) Train the network to get the model for inference
+7. (Optional) Train the network to get the model for inference
 
-7. Compile the NeuroSim C++ code
+8. Compile the NeuroSim C++ code
 ```
 cd Inference_pytorch/NeuroSIM
 make
 ```
 
-8. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
+9. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
 
 ```
 cd ..
