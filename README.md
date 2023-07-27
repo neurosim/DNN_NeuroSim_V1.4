@@ -50,46 +50,6 @@ Where N is the desired number of rows activated in parallel and N <= sub-array s
 globalBusType = false;		// false: X-Y Bus      // true: H-Tree
 ```
 
-
-**_three default examples for quick start_**:
-```
-1. VGG8 on cifar10 
-   8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
-3. DenseNet40 on cifar10 
-   8-bit "WAGE" mode pretrained model is uploaded to './log/DenseNet40.pth'
-5. ResNet18 on imagenet 
-   "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
-```
-:point_right: :point_right: :point_right: **To quickly start inference estimation of default models (skip training)**
-```
-python inference.py --dataset cifar10 --model VGG8 --mode WAGE --cellBit 1 --subArray 128 --parallelRead 64
-python inference.py --dataset cifar10 --model DenseNet40 --mode WAGE
-python inference.py --dataset imagenet --model ResNet18 --mode FP
-```
-
-<br/>
-
-**_For estimation of on-chip training accelerators, please visit released V2.1 [DNN+NeuroSim V2.1](https://github.com/neurosim/DNN_NeuroSim_V2.1)_**
-
-In Pytorch/Tensorflow wrapper, users are able to define **_network structures, precision of synaptic weight and neural activation_**. With the integrated NeuroSim which takes real traces from wrapper, the framework can support hierarchical organization from device level to circuit level, to chip level and to algorithm level, enabling **_instruction-accurate evaluation on both accuracy and hardware performance of inference_**.
-
-Developers: [Junmo Lee](mailto:junmolee@gatech.edu) :two_men_holding_hands: [James Read](mailto:jread6@gatech.edu) :two_men_holding_hands: [Anni Lu](mailto:alu75@gatech.edu) :two_women_holding_hands: [Xiaochen Peng](mailto:xpeng76@gatech.edu) :two_women_holding_hands: [Shanshi Huang](mailto:shuang406@gatech.edu).
-
-This research is supported by NSF CAREER award, NSF/SRC E2CDA program, PRISM center and CHIMES center, both part of the SRC/DARPA JUMP 2.0 program.
-
-If you use the tool or adapt the tool in your work or publication, you are required to cite the following reference:
-
-**_X. Peng, S. Huang, Y. Luo, X. Sun and S. Yu, ※[DNN+NeuroSim: An End-to-End Benchmarking Framework for Compute-in-Memory Accelerators with Versatile Device Technologies](https://ieeexplore-ieee-org.prx.library.gatech.edu/document/8993491), *§ IEEE International Electron Devices Meeting (IEDM)*, 2019._**
-
-If you have logistic questions or comments on the model, please contact :man: [Prof. Shimeng Yu](mailto:shimeng.yu@ece.gatech.edu), and if you have technical questions or comments, please contact :man: [Junmo Lee](mailto:junmolee@gatech.edu) or :man: [James Read](mailto:jread6@gatech.edu) or :woman: [Anni Lu](mailto:alu75@gatech.edu).
-
-
-## File lists
-1. Manual: `Documents/DNN NeuroSim V1.4 Manual.pdf`
-2. DNN_NeuroSim wrapped by Pytorch: 'Inference_pytorch'
-3. NeuroSim under Pytorch Inference: 'Inference_pytorch/NeuroSIM'
-
-
 ## Installation steps (Linux + Anaconda/Miniconda)
 We have included an Anaconda environment with this version to make package installation easier.
 
@@ -121,7 +81,17 @@ conda env create --file environment.yml
 conda activate neurosim
 ```
 
-6. Train the network to get the model for inference (can be skipped by using pretrained default models)
+6a. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
+```
+1. VGG8 on cifar10 
+   8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
+3. DenseNet40 on cifar10 
+   8-bit "WAGE" mode pretrained model is uploaded to './log/DenseNet40.pth'
+5. ResNet18 on imagenet 
+   "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
+```
+
+6b. (Optional) Train the network to get the model for inference
 
 7. Compile the NeuroSim codes
 ```
@@ -129,12 +99,38 @@ cd Inference_pytorch/NeuroSIM
 make
 ```
 
-8. Run Pytorch/Tensorflow wrapper with default settings (integrated with NeuroSim)
+8. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
 
 ```
 cd ..
-python inference.py
+
+python inference.py --dataset cifar10 --model VGG8 --mode WAGE --cellBit 1 --subArray 128 --parallelRead 64
+python inference.py --dataset cifar10 --model DenseNet40 --mode WAGE --cellBit 2 --ADCprecision 6
+python inference.py --dataset imagenet --model ResNet18 --mode FP --onoffratio 100
 ```
+
+<br/>
+
+**_For estimation of on-chip training accelerators, please visit released V2.1 [DNN+NeuroSim V2.1](https://github.com/neurosim/DNN_NeuroSim_V2.1)_**
+
+In Pytorch/Tensorflow wrapper, users are able to define **_network structures, precision of synaptic weight and neural activation_**. With the integrated NeuroSim which takes real traces from wrapper, the framework can support hierarchical organization from device level to circuit level, to chip level and to algorithm level, enabling **_instruction-accurate evaluation on both accuracy and hardware performance of inference_**.
+
+Developers: [Junmo Lee](mailto:junmolee@gatech.edu) :two_men_holding_hands: [James Read](mailto:jread6@gatech.edu) :two_men_holding_hands: [Anni Lu](mailto:alu75@gatech.edu) :two_women_holding_hands: [Xiaochen Peng](mailto:xpeng76@gatech.edu) :two_women_holding_hands: [Shanshi Huang](mailto:shuang406@gatech.edu).
+
+This research is supported by NSF CAREER award, NSF/SRC E2CDA program, PRISM center and CHIMES center, both part of the SRC/DARPA JUMP 2.0 program.
+
+If you use the tool or adapt the tool in your work or publication, you are required to cite the following reference:
+
+**_X. Peng, S. Huang, Y. Luo, X. Sun and S. Yu, ※[DNN+NeuroSim: An End-to-End Benchmarking Framework for Compute-in-Memory Accelerators with Versatile Device Technologies](https://ieeexplore-ieee-org.prx.library.gatech.edu/document/8993491), *§ IEEE International Electron Devices Meeting (IEDM)*, 2019._**
+
+If you have logistic questions or comments on the model, please contact :man: [Prof. Shimeng Yu](mailto:shimeng.yu@ece.gatech.edu), and if you have technical questions or comments, please contact :man: [Junmo Lee](mailto:junmolee@gatech.edu) or :man: [James Read](mailto:jread6@gatech.edu) or :woman: [Anni Lu](mailto:alu75@gatech.edu).
+
+
+## File lists
+1. Manual: `Documents/DNN NeuroSim V1.4 Manual.pdf`
+2. DNN_NeuroSim wrapped by Pytorch: 'Inference_pytorch'
+3. NeuroSim under Pytorch Inference: 'Inference_pytorch/NeuroSIM'
+
 
 
 For additional details on the usage of this tool, please refer to the manual.
