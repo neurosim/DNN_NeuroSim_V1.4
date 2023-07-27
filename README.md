@@ -2,28 +2,58 @@
 
 The DNN+NeuroSim framework was developed by [Prof. Shimeng Yu's group](https://shimeng.ece.gatech.edu/) (Georgia Institute of Technology). The model is made publicly available on a non-commercial basis. Copyright of the model is maintained by the developers, and the model is distributed under the terms of the [Creative Commons Attribution-NonCommercial 4.0 International Public License](http://creativecommons.org/licenses/by-nc/4.0/legalcode)
 
-:star2: This is the released version 1.4 (July 21, 2023) for the tool, and this version has **_improved following inference engine estimation_**:
+:star2: This is the released version 1.4 (August 1, 2023) for the tool, and this version has **_improved following inference engine estimation_**:
 ```
-1. Add partial parallel mode in python wrapper (SLC only) and C++ code 
-2. Support for technology scaling down to 1nm node
-3. XY Bus
+1. Support for technology scaling down to 1nm node in hardware estimation framework (C++ code).
 
-Please see the updated manual for more details
+The following is a list of the supported nodes:
+
+130nm
+90nm
+65nm
+45nm
+32nm
+22nm
+14nm
+10nm
+7nm
+5nm   -   IRDS Projection (2021-2022)
+3nm   -   IRDS Projection (2021-2022)
+2nm   -   IRDS Projection (2021-2022)
+1nm   -   IRDS Projection (2021-2022)
+
+:point_right: :point_right: :point_right: **In "Param.cpp", to pick technology node:**
 ```
+modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
+For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
+
+For additional details about the device parameters used in NeuroSim, refer to section 7 of the V1.4 manual.
+
+```
+
+2. Add partial parallel mode in python wrapper (for single-level cells only) and C++ code for hardware estimation.
 
 :point_right: :point_right: :point_right: **To enable partial parallel mode**
 ```
---partialParallel N
+Specify the parameter "parallelRead" when running the python wrapper to enable partial parallel mode in both the python wrapper and C++ code.
 
-Where N is the desired number of rows activated in parallel.
+--parallelRead N
+
+Where N is the desired number of rows activated in parallel and N <= sub array size.
+
 ```
 
+3. XY Bus as an alternative to H-tree interconnect.
 
-:point_right: :point_right: :point_right: **In "Param.cpp", to switch mode:**
+:point_right: :point_right: :point_right: **In "Param.cpp", to switch interconnect mode:**
 ```
 globalBusType = false;		// false: X-Y Bus      // true: H-Tree
 
 ```
+
+```
+
+
 **_three default examples for quick start_**:
 ```
 1. VGG8 on cifar10 
@@ -35,7 +65,7 @@ globalBusType = false;		// false: X-Y Bus      // true: H-Tree
 ```
 :point_right: :point_right: :point_right: **To quickly start inference estimation of default models (skip training)**
 ```
-python inference.py --dataset cifar10 --model VGG8 --mode WAGE
+python inference.py --dataset cifar10 --model VGG8 --mode WAGE --cellBit 1 --subArray 128 --parallelRead 64
 python inference.py --dataset cifar10 --model DenseNet40 --mode WAGE
 python inference.py --dataset imagenet --model ResNet18 --mode FP
 ```
@@ -48,13 +78,13 @@ In Pytorch/Tensorflow wrapper, users are able to define **_network structures, p
 
 Developers: [Junmo Lee](mailto:junmolee@gatech.edu) :two_men_holding_hands: [James Read](mailto:jread6@gatech.edu) :two_men_holding_hands: [Anni Lu](mailto:alu75@gatech.edu) :two_women_holding_hands: [Xiaochen Peng](mailto:xpeng76@gatech.edu) :two_women_holding_hands: [Shanshi Huang](mailto:shuang406@gatech.edu).
 
-This research is supported by NSF CAREER award, NSF/SRC E2CDA program, and ASCENT, one of the SRC/DARPA JUMP centers.
+This research is supported by NSF CAREER award, NSF/SRC E2CDA program, PRISM center and CHIMES center, both part of the SRC/DARPA JUMP 2.0 program.
 
 If you use the tool or adapt the tool in your work or publication, you are required to cite the following reference:
 
 **_X. Peng, S. Huang, Y. Luo, X. Sun and S. Yu, ※[DNN+NeuroSim: An End-to-End Benchmarking Framework for Compute-in-Memory Accelerators with Versatile Device Technologies](https://ieeexplore-ieee-org.prx.library.gatech.edu/document/8993491), *§ IEEE International Electron Devices Meeting (IEDM)*, 2019._**
 
-If you have logistic questions or comments on the model, please contact :man: [Prof. Shimeng Yu](mailto:shimeng.yu@ece.gatech.edu), and if you have technical questions or comments, please contact :man: [Junmo Lee](mailto:junmolee@gatech.edu) or :man: [James Read](mailto:jread6@gatech.edu) or :woman: [Anni Lu](mailto:alu75@gatech.edu) or :woman: [Xiaochen Peng](mailto:xpeng76@gatech.edu) or :woman: [Shanshi Huang](mailto:shuang406@gatech.edu).
+If you have logistic questions or comments on the model, please contact :man: [Prof. Shimeng Yu](mailto:shimeng.yu@ece.gatech.edu), and if you have technical questions or comments, please contact :man: [Junmo Lee](mailto:junmolee@gatech.edu) or :man: [James Read](mailto:jread6@gatech.edu) or :woman: [Anni Lu](mailto:alu75@gatech.edu).
 
 
 ## File lists
@@ -63,20 +93,49 @@ If you have logistic questions or comments on the model, please contact :man: [P
 3. NeuroSim under Pytorch Inference: 'Inference_pytorch/NeuroSIM'
 
 
-## Installation steps (Linux)
-1. Get the tool from GitHub
+## Installation steps (Linux + Anaconda/Miniconda)
+We have included an Anaconda environment with this version to make package installation easier.
+If you don't want to use the conda environment or don't have a CUDA enabled GPU, check the environment.yml file for the versions of all packages used.
+
+This version supports the recently released PyTorch 2.0
+We have currently tested the following CUDA drivers:
+
+
+1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
+2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
+
+3. Get the tool from GitHub
 ```
 git clone https://github.com/neurosim/DNN_NeuroSim_V1.4.git
+cd DNN_NeuroSim_V1.4
 ```
 
-2. Train the network to get the model for inference (can be skipped by using pretrained default models)
+4. Create conda environemnt from provided environment file
 
-3. Compile the NeuroSim codes
 ```
+conda create env --file environment.yml
+```
+
+5. Activate neurosim environment
+
+```
+conda activate neurosim
+```
+
+6. Train the network to get the model for inference (can be skipped by using pretrained default models)
+
+7. Compile the NeuroSim codes
+```
+cd Inference_pytorch/NeuroSIM
 make
 ```
 
-4. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim)
+8. Run Pytorch/Tensorflow wrapper with default settings (integrated with NeuroSim)
+
+```
+cd ..
+python inference.py
+```
 
 
 For the usage of this tool, please refer to the manual.
