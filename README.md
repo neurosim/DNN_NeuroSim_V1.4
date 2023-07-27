@@ -22,6 +22,8 @@ The following is a list of the supported nodes:
 2nm   -   IRDS Projection (2021-2022)
 1nm   -   IRDS Projection (2021-2022)
 
+```
+
 :point_right: :point_right: :point_right: **In "Param.cpp", to pick technology node:**
 ```
 modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
@@ -48,8 +50,6 @@ Where N is the desired number of rows activated in parallel and N <= sub array s
 :point_right: :point_right: :point_right: **In "Param.cpp", to switch interconnect mode:**
 ```
 globalBusType = false;		// false: X-Y Bus      // true: H-Tree
-
-```
 
 ```
 
