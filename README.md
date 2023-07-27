@@ -42,7 +42,7 @@ Partial parallel mode will be enabled in both the python wrapper and C++ code.
 
 --parallelRead N
 
-Where N is the desired number of rows activated in parallel and N <= sub array size.
+Where N is the desired number of rows activated in parallel and N <= sub-array size.
 
 ```
 
