@@ -115,9 +115,10 @@ criterion = torch.nn.CrossEntropyLoss()
 # NOTE: Parallel read is not supported in inference accuracy simulation with multi-level cells yet
 if args.parallelRead < args.subArray and args.cellBit > 1:
     logger('\n=====================================================================================')
-    logger('ERROR: Parallel read is not supported for multi-level cells yet!')
-    logger('We will support this feature in DNN_NeuroSim v1.5 (to be released in Spring 2024).')
-    logger('Thank you for using NeuroSim, we appreciate your patience.')
+    logger('ERROR: Partial parallel read is not supported for multi-level cells yet!')
+    logger('Please make sure parallelRead == subArray when cellBit > 1.')
+    logger('We will support partial parallel for multi-level cells in DNN_NeuroSim v1.5 (to be released in Spring 2024).')
+    logger('Thank you for using NeuroSim! We appreciate your patience.')
     logger('=====================================================================================\n')
     exit()
 
