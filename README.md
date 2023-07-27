@@ -37,7 +37,8 @@ For additional details about the device parameters used in NeuroSim, refer to se
 
 :point_right: :point_right: :point_right: **To enable partial parallel mode**
 ```
-Specify the parameter "parallelRead" when running the python wrapper to enable partial parallel mode in both the python wrapper and C++ code.
+Specify the parameter "parallelRead" when running the python wrapper.
+Partial parallel mode will be enabled in both the python wrapper and C++ code.
 
 --parallelRead N
 
