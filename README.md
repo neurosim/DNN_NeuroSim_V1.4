@@ -22,7 +22,7 @@ The following is a list of the supported nodes:
 2nm   -   IRDS Projection (2021-2022)
 1nm   -   IRDS Projection (2021-2022)
 
-**To pick the technology node:**
+To select a technology node:
 modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
 For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
 
