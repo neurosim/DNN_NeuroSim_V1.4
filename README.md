@@ -6,21 +6,21 @@ The DNN+NeuroSim framework was developed by [Prof. Shimeng Yu's group](https://s
 
 ## 1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).
 ```
-The following is a list of the supported nodes:
+The following is a list of the supported nodes with key features:
 
-130nm
-90nm
-65nm
-45nm
-32nm
-22nm
-14nm
-10nm
-7nm
-5nm   -   IRDS Projection (2021-2022)
-3nm   -   IRDS Projection (2021-2022)
-2nm   -   IRDS Projection (2021-2022)
-1nm   -   IRDS Projection (2021-2022)
+130nm Same as V1.3 (PTM Model)
+90nm Same as V1.3 (PTM Model)
+65nm Same as V1.3 (PTM Model)
+45nm Same as V1.3 (PTM Model)
+32nm Same as V1.3 (PTM Model)
+22nm Same as V1.3 (PTM Model)
+14nm FinFET, Fin number=4 (per each NMOS/PMOS)
+10nm FinFET, Fin number=3 (per each NMOS/PMOS)
+7nm FinFET, Fin number=2 (per each NMOS/PMOS)
+5nm FinFET, Fin number=2 (per each NMOS/PMOS)
+3nm FinFET, Fin number=2 (per each NMOS/PMOS)
+2nm Nanosheet (GAA), Nanosheet number=3 (per each NMOS/PMOS), Backside power rail
+1nm Nanosheet (GAA), Nanosheet number=4 (per each NMOS/PMOS), Backside power rail, Dielectric wall separation, CFET design for SRAM
 ```
 
 ### To select a technology node:
