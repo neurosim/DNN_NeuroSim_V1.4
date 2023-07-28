@@ -28,9 +28,9 @@ parser.add_argument('--test_interval', type=int, default=1,  help='how many epoc
 parser.add_argument('--logdir', default='log/default', help='folder to save to the log')
 parser.add_argument('--lr', type=float, default=0.01, help='learning rate (default: 1e-3)')
 parser.add_argument('--decreasing_lr', default='140,180', help='decreasing strategy')
-parser.add_argument('--wl_weight', type=int, default=4)
+parser.add_argument('--wl_weight', type=int, default=8)
 parser.add_argument('--wl_grad', type=int, default=8)
-parser.add_argument('--wl_activate', type=int, default=4)
+parser.add_argument('--wl_activate', type=int, default=8)
 parser.add_argument('--wl_error', type=int, default=8)
 # Hardware Properties
 # if do not consider hardware effects, set inference=0
@@ -38,7 +38,7 @@ parser.add_argument('--inference', type=int, default=0, help='run hardware infer
 parser.add_argument('--subArray', type=int, default=128, help='size of subArray (e.g. 128*128)')
 parser.add_argument('--parallelRead', type=int, default=128, help='number of rows read in parallel (<= subArray e.g. 32)')
 parser.add_argument('--ADCprecision', type=int, default=5, help='ADC precision (e.g. 5-bit)')
-parser.add_argument('--cellBit', type=int, default=4, help='cell precision (e.g. 4-bit/cell)')
+parser.add_argument('--cellBit', type=int, default=1, help='cell precision (e.g. 4-bit/cell)')
 parser.add_argument('--onoffratio', type=float, default=10, help='device on/off ratio (e.g. Gmax/Gmin = 3)')
 # if do not run the device retention / conductance variation effects, set vari=0, v=0
 parser.add_argument('--vari', type=float, default=0., help='conductance variation (e.g. 0.1 standard deviation to generate random variation)')
@@ -117,7 +117,7 @@ if args.parallelRead < args.subArray and args.cellBit > 1:
     logger('\n=====================================================================================')
     logger('ERROR: Partial parallel read is not supported for multi-level cells yet!')
     logger('Please make sure parallelRead == subArray when cellBit > 1.')
-    logger('We will support partial parallel for multi-level cells in DNN_NeuroSim v1.5 (to be released in Spring 2024).')
+    logger('We will support partial parallel for multi-level cells in DNN_NeuroSim V1.5 (to be released in Spring 2024).')
     logger('Thank you for using NeuroSim! We appreciate your patience.')
     logger('=====================================================================================\n')
     exit()

@@ -51,14 +51,24 @@ globalBusType = false;		// false: X-Y Bus      // true: H-Tree
 ```
 
 ## Installation steps (Linux + Anaconda/Miniconda)
-We have included an Anaconda environment with this version to make package installation easier.
-
-If you don't want to use the conda environment or don't have a CUDA enabled GPU, check the environment.yml file for the versions of all packages used.
+We recommend using anaconda package manager to install PyTorch.
 
 This version supports the recently released PyTorch 2.0
 
 We have currently tested the following CUDA drivers:
+(1) 
+Red Hat 8.8 (Ootpa)
+gcc: v8.5.0
+glibc: v2.28
+NVIDIA Driver Version: 535.54.03
+CUDA Version: 12.2
 
+(2)
+Ubuntu 20.04
+gcc: v9.4.0
+glibc: v2.31
+NVIDIA Driver Version: 525.60.13
+CUDA Version: 12.0
 
 1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
 2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
@@ -69,19 +79,25 @@ git clone https://github.com/neurosim/DNN_NeuroSim_V1.4.git
 cd DNN_NeuroSim_V1.4
 ```
 
-4. Create conda environemnt from provided environment file
+4. Create a conda environment
 
 ```
-conda env create --file environment.yml
+conda create --name neurosim
 ```
 
-5. Activate neurosim environment
+5. Download and install PyTorch packages
+
+```
+conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+```
+
+6. Activate neurosim environment
 
 ```
 conda activate neurosim
 ```
 
-6. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
+7. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
 ```
 1. VGG8 on cifar10 
    8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
@@ -91,22 +107,22 @@ conda activate neurosim
    "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
 ```
 
-7. (Optional) Train the network to get the model for inference
+8. (Optional) Train the network to get the model for inference
 
-8. Compile the NeuroSim C++ code
+9. Compile the NeuroSim C++ code
 ```
 cd Inference_pytorch/NeuroSIM
 make
 ```
 
-9. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
+10. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
 
 ```
 cd ..
 
-python inference.py --dataset cifar10 --model VGG8 --mode WAGE --cellBit 1 --subArray 128 --parallelRead 64
-python inference.py --dataset cifar10 --model DenseNet40 --mode WAGE --cellBit 2 --ADCprecision 6
-python inference.py --dataset imagenet --model ResNet18 --mode FP --onoffratio 100
+python inference.py --dataset cifar10 --model VGG8 --mode WAGE --inference 1 --cellBit 1 --subArray 128 --parallelRead 64
+python inference.py --dataset cifar10 --model DenseNet40 --mode WAGE --inference 1 --cellBit 2 --ADCprecision 6
+python inference.py --dataset imagenet --model ResNet18 --mode FP --inference 1 --onoffratio 100
 ```
 
 <br/>
