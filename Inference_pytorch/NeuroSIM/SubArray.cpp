@@ -209,10 +209,6 @@ void SubArray::Initialize(int _numRow, int _numCol, double _unitWireRes){  //ini
 						+ CalculateDrainCap(cell.widthSRAMCellPMOS * ((tech.featureSize <= 14*1e-9)? 2:1) * tech.featureSize, PMOS, MAX_TRANSISTOR_HEIGHT * tech.featureSize, tech) 
 						+ CalculateGateCap(cell.widthSRAMCellNMOS * ((tech.featureSize <= 14*1e-9)? 2:1) * tech.featureSize, tech) + CalculateGateCap(cell.widthSRAMCellPMOS * ((tech.featureSize <= 14*1e-9)? 2:1) * tech.featureSize, tech);
 
-
-
-		
-
 		// 1.4 update: for buffer insertion
 		double unitcap= capRow1/param->numColSubArray;
 		double unitres= resRow/param->numColSubArray;
@@ -992,9 +988,14 @@ void SubArray::CalculateLatency(double columnRes, const vector<double> &columnRe
 					if (CalculateclkFreq) {
 						// 1.4 update - updated
 						readLatency += MAX(wlSwitchMatrix.readLatency + bufferlatency, ((numColMuxed > 1)==true? (mux.readLatency+muxDecoder.readLatency):0) );
-						// readLatency += precharger.readLatency; not needed
+						readLatency += precharger.readLatency;
 						// readLatency += colDelay;	   
 						readLatency += multilevelSenseAmp.readLatency;
+
+						param->rowdelay = wlSwitchMatrix.readLatency + bufferlatency;
+						param->muxdelay = mux.readLatency+muxDecoder.readLatency;
+						param->ADClatency = multilevelSenseAmp.readLatency;
+
 						readLatency += multilevelSAEncoder.readLatency;
 						readLatency += sarADC.readLatency;
 						readLatency *= (validated==true? param->beta : 1);	// latency factor of sensing cycle, beta = 1.4 by default
@@ -1108,7 +1109,7 @@ void SubArray::CalculateLatency(double columnRes, const vector<double> &columnRe
 					
 					if (CalculateclkFreq) {
 						readLatency += MAX(wlSwitchMatrix.readLatency, ((numColMuxed > 1)==true? (mux.readLatency+muxDecoder.readLatency):0));
-						// readLatency += precharger.readLatency; not needed
+						readLatency += precharger.readLatency;
 						// readLatency += colDelay;
 						readLatency += multilevelSenseAmp.readLatency;
 						readLatency += multilevelSAEncoder.readLatency;
@@ -1286,6 +1287,11 @@ void SubArray::CalculateLatency(double columnRes, const vector<double> &columnRe
 						readLatency += multilevelSAEncoder.readLatency;
 						readLatency += sarADC.readLatency;
 						readLatency *= (validated==true? param->beta : 1);	// latency factor of sensing cycle, beta = 1.4 by default									
+						param->rowdelay = wlNewSwitchMatrix.readLatency + wlSwitchMatrix.readLatency + bufferlatency;
+						param->muxdelay = mux.readLatency+muxDecoder.readLatency;
+						param->ADClatency = multilevelSenseAmp.readLatency;					
+					
+					
 					}
 				}
 				if (!CalculateclkFreq) {
@@ -1522,7 +1528,7 @@ void SubArray::CalculatePower(const vector<double> &columnResistance) {
 				sramWriteDriver.CalculatePower(numWriteOperationPerRow*numRow*activityRowWrite);
 				
 				// 1.4 update: ADC update
-				param->reference_energy_peri = capRow1/param->numColSubArray * tech.vdd * tech.vdd * (numRow) * 1.0/2.0;				
+				param->reference_energy_peri = capRow1/param->numColSubArray * tech.vdd * tech.vdd * (numRow);				
 				
 				if (numColMuxed > 1) {
 					mux.CalculatePower(numColMuxed);	// Mux still consumes energy during row-by-row read
@@ -1664,6 +1670,8 @@ void SubArray::CalculatePower(const vector<double> &columnResistance) {
 				// Array
 				// 1.4 update: read energy update : needs check for BNN/XNOR mode; Anni update
 				readDynamicEnergyArray = capRow1 * tech.vdd * tech.vdd * (numRow) * activityRowRead * numColMuxed; // added for WL/BL discharging
+				// 1.4 update: ADC update
+				param->reference_energy_peri = capRow1/param->numColSubArray * tech.vdd * tech.vdd * numRow;
 				
 				// // 1.4 update: WL energy for write + modification (assuming toggling of SRAM bit at every write, each Q/Qbar consumes half CVdd^2)
 				// // needs check for BNN/XNOR mode
@@ -1798,7 +1806,8 @@ void SubArray::CalculatePower(const vector<double> &columnResistance) {
 				double capBL = lengthCol * 0.2e-15/1e-6;
 
 				// 1.4 update: ADC update
-				param->reference_energy_peri = capRow2/param->numColSubArray * tech.vdd * tech.vdd * numRow * 1.0/2.0;
+				// param->reference_energy_peri = capRow2/param->numColSubArray * tech.vdd * tech.vdd * numRow;
+				// for RRAM, the reference columns can always be turned on
 
 				if (cell.accessType == CMOS_access) {
 					wlNewSwitchMatrix.CalculatePower(numColMuxed, 2*numWriteOperationPerRow*numRow*activityRowWrite, activityRowRead);
@@ -1991,6 +2000,8 @@ void SubArray::CalculatePower(const vector<double> &columnResistance) {
 				// readDynamicEnergyArray += capBL * cell.readVoltage * cell.readVoltage * numReadCells * numAdd; // Selected BLs activityColWrite -> Already considered in multilevelsenseamp.cpp
 				readDynamicEnergyArray += capRow2 * tech.vdd * tech.vdd * numRow * activityRowRead; // Selected WL
 				readDynamicEnergyArray *= numColMuxed;
+				// 1.4 update: ADC update
+				// param->reference_energy_peri = capRow2/param->numColSubArray * tech.vdd * tech.vdd * numRow;
 
 				readDynamicEnergy = 0;
 				readDynamicEnergy += wlNewSwitchMatrix.readDynamicEnergy;

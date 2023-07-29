@@ -57,8 +57,8 @@ Param::Param() {
 	/***************************************** user defined design options and parameters *****************************************/
 	operationmode = 2;     		// 1: conventionalSequential (Use several multi-bit RRAM as one synapse)
 								// 2: conventionalParallel (Use several multi-bit RRAM as one synapse)
-	
-	memcelltype = 2;        	// 1: cell.memCellType = Type::SRAM
+
+	memcelltype = 1;        	// 1: cell.memCellType = Type::SRAM
 								// 2: cell.memCellType = Type::RRAM
 								// 3: cell.memCellType = Type::FeFET
 	
@@ -72,7 +72,7 @@ Param::Param() {
 	deviceroadmap = 2;      	// 1: inputParameter.deviceRoadmap = HP
 								// 2: inputParameter.deviceRoadmap = LSTP
 								
-	// 1.4 update
+	// Anni update
 	globalBusType = false;		// false: X-Y Bus
 								// true: H-Tree
 								
@@ -135,7 +135,7 @@ Param::Param() {
 	// 1.4 update: Activation implementation option added
 	Activationtype=false; // true: SRAM, False: RRAM
 
-	// 1.4 update: special layout
+	// 1.4 update: special layout (for GAA nodes (1, 2, nm) only)
 	speciallayout=1;
 
 	// 1.4 update
@@ -150,15 +150,11 @@ Param::Param() {
 	buffernumber=0;
 	buffersizeratio=0;		
 
-	// 1.4 update: dummy column sharing - how many senseamplfies share one dummny columns?
-	// dummy column sharing should not be high, since it could change the column cap of the dummy column.
-	// In order for the dummy column to serve as a reference, the column caps of the dummy & main column should be matched closely
-	dumcolshared = 32;
+
 
 // For Linux Automation (test for 1.4 update)
 const int 
-tech=5
-;
+tech=5;
 
 	// 1.4 update: new technology node added
 	// recommended buffer/driver sizings for MUX, WLdecoder, switchmatrix are provided for each technology node
@@ -222,14 +218,14 @@ tech=5
 		sizingfactor_MUX=  25;
 		switchmatrixsizeratio = 0.1;
 		buffernumber = 3 ; 
-		buffersizeratio = 10;
+		buffersizeratio = 3;
 
 		break;  
-		case 12: technode =  1; 
+		case 13: technode =  1; 
 		sizingfactor_MUX=  30;
 		switchmatrixsizeratio= 0.1 ;
 		buffernumber = 3 ; 
-		buffersizeratio = 8;
+		buffersizeratio = 3;
 
 		break; 
 	} 
@@ -329,7 +325,11 @@ tech=5
 	
 	levelOutput = 16;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
 	cellBit = 1;                        // precision of memory device 
-	
+	// 1.4 update: dummy column sharing - how many senseamplfiers share one dummny columns?
+	// dummy column sharing should not be high, since it could change the column cap of the dummy column.
+	// In order for the dummy column to serve as a reference, the column caps of the dummy & main column should be matched closely
+	dumcolshared = levelOutput;
+
 	/*** parameters for SRAM ***/
 	// due the scaling, suggested SRAM cell size above 22nm: 160F^2
 	// SRAM cell size at 14nm: 300F^2
@@ -409,8 +409,8 @@ tech=5
 	heightInFeatureSizeCrossbar = 2;    // Crossbar Cell height in feature size
 	widthInFeatureSizeCrossbar = 2;     // Crossbar Cell width in feature size
 	
-	resistanceOn = 6e3;               // Ron resistance at Vr in the reported measurement data (need to recalculate below if considering the nonlinearity)
-	resistanceOff = 6e3*17;           // Roff resistance at Vr in the reported measurement dat (need to recalculate below if considering the nonlinearity)
+	resistanceOn = 100e3; // 6e3;               // Ron resistance at Vr in the reported measurement data (need to recalculate below if considering the nonlinearity)
+	resistanceOff = 100e3*17;// 6e3*17;           // Roff resistance at Vr in the reported measurement dat (need to recalculate below if considering the nonlinearity)
 	maxConductance = (double) 1/resistanceOn;
 	minConductance = (double) 1/resistanceOff;
 	

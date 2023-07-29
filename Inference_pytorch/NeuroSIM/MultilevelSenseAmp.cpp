@@ -305,7 +305,7 @@ void MultilevelSenseAmp::CalculatePower(const vector<double> &columnResistance, 
 
 					double Column_SwitchingE = (param->columncap * 2) * (1/(levelOutput-1)+1/(param->dumcolshared))/2 * pow(Vread,2) // switching at the senseamp-column interface (column cap)
 					+ param->reference_energy_peri/(param->dumcolshared) // reference column activation energy
-					+ (gatecap_senseamp_N  * 4 + junctioncap_senseamp_N * 2) * pow(Vread,2) // switching at the senseamp-column interface (input/mirror cap)
+					+ (gatecap_senseamp_N  * 2 + (junctioncap_senseamp_N+gatecap_senseamp_N)/(levelOutput-1) +  (junctioncap_senseamp_N+gatecap_senseamp_N)/(param->dumcolshared)) * pow(Vread,2) // switching at the senseamp-column interface (input/mirror cap)
 					+ (gatecap_senseamp_P*2 + gatecap_senseamp_N) * pow(tech.vdd,2)
 					+ (gatecap_senseamp_P*3 + gatecap_senseamp_N*3 + (junctioncap_senseamp_P+junctioncap_senseamp_N)*3 + junctioncap_senseamp_P*1  ) * pow(tech.vdd,2) // switching at the senseamp & latch
 					+ (gatecap_senseamp_P + gatecap_senseamp_N) * pow(tech.vdd,2) // Interface with the encoding logic
@@ -348,7 +348,8 @@ void MultilevelSenseAmp::CalculatePower(const vector<double> &columnResistance, 
 
 					double Column_SwitchingE = (param->columncap * 2) * (1+1/(param->dumcolshared))/2 * pow(Vread,2) // switching at the senseamp-column interface (column cap)
 					+ param->reference_energy_peri/(param->dumcolshared) // reference column activation energy					
-					+ (gatecap_senseamp_N  * 4 + junctioncap_senseamp_N * 2) * pow(Vread,2) // switching at the senseamp-column interface (input/mirror cap)
+					+ (gatecap_senseamp_N  * 2 + (junctioncap_senseamp_N)/(levelOutput-1) +  (junctioncap_senseamp_N)/(param->dumcolshared)) * pow(Vread,2) // switching at the senseamp-column interface (input/mirror cap)
+					// since ref_voltage is assumed to be very small, the energy consumption of the corresponding transistor is negligible
 					+ (gatecap_senseamp_P*2 + gatecap_senseamp_N) * pow(tech.vdd,2)
 					+ (gatecap_senseamp_P*3 + gatecap_senseamp_N*3 + (junctioncap_senseamp_P+junctioncap_senseamp_N)*3 + junctioncap_senseamp_P*1  ) * pow(tech.vdd,2) // switching at the senseamp & latch
 					+ (gatecap_senseamp_P + gatecap_senseamp_N) * pow(tech.vdd,2) // Interface with the encoding logic
@@ -370,6 +371,9 @@ void MultilevelSenseAmp::PrintProperty(const char* str) {
 
 
 double MultilevelSenseAmp::GetColumnLatency(double columnRes) {
+
+	// dummy function - this function is no longer used
+
 	double Column_Latency = 0;
 	double up_bound = 3, mid_bound = 1.1, low_bound = 0.9;
 	double T_max = 0;
@@ -506,13 +510,13 @@ double MultilevelSenseAmp::GetColumnPower(double columnRes) {
 				} else if (param->technode == 22){   
 					Column_Power = 1.8939*(levelOutput-1)*1e-6;
 					Column_Power += 0.073*exp(-2.311*log10(columnRes));
-				} else if (param->technode == 14){  
+				} else if (param->technode == 14){  // dummy values (not supported mode)
 					Column_Power = 1.2*(levelOutput-1)*1e-6;
 					Column_Power += 0.0584*exp(-2.311*log10(columnRes));
-				} else if (param->technode == 10){  
+				} else if (param->technode == 10){   // dummy values (not supported mode)
 					Column_Power = 0.8*(levelOutput-1)*1e-6;
 					Column_Power += 0.0318*exp(-2.311*log10(columnRes));
-				} else {   // 7nm
+				} else {   // 7nm // dummy values (not supported mode)
 					Column_Power = 0.5*(levelOutput-1)*1e-6;
 					Column_Power += 0.0210*exp(-2.311*log10(columnRes));
 				}

@@ -116,7 +116,7 @@ public:
 	// 1.4 update: new ADC modeling related parameters
 	double dumcolshared;
 	double columncap;
-	double reference_energy_peri;
+	double reference_energy_peri=0;
 	
 	// 1.4 update: array dimension/SRAM access resistance for multilevelsenseamp
 	double arrayheight;
@@ -126,6 +126,11 @@ public:
 	// 1.4 update 
 	double inputtoggle;
 	double outputtoggle;
+
+	// 1.4 debug
+	double ADClatency;
+	double rowdelay;
+	double muxdelay;
 	
 
 	// Anni update: partial parallel mode
