@@ -152,76 +152,75 @@ Param::Param() {
 
 
 
-// For Linux Automation (test for 1.4 update)
-const int 
-tech=5;
+
+	technologynode=22;
 
 	// 1.4 update: new technology node added
 	// recommended buffer/driver sizings for MUX, WLdecoder, switchmatrix are provided for each technology node
 	// sizingfactor_WLdecoder needs to be adjusted to reduce SRAM WL delay
 
-	switch (tech){
-		case 0: technode = 130; 
+	switch (technologynode){
+		case 130: technode = 130; 
 		
 		break;  
-		case 1: technode =  90; 
+		case 90: technode =  90; 
 		
 		break;  
-		case 2: technode =  65; 
+		case 65: technode =  65; 
 		
 		break;  
-		case 3: technode =  45; 
+		case 45: technode =  45; 
 		
 		break;  
-		case 4: technode =  32; 
+		case 32: technode =  32; 
 		
 		break;  
-		case 5: technode =  22; 
+		case 22: technode =  22; 
 		sizingfactor_MUX=   110;  
 		newswitchmatrixsizeratio = 14;
 		switchmatrixsizeratio=0.2;		
 		buffernumber = 0 ; 
 
 		break; 
-		case 6:technode =  14; 
+		case 14: technode =  14; 
 		sizingfactor_MUX=  130;
 		switchmatrixsizeratio=0.2;
 		buffernumber = 0 ; 
 		
 
 		break;  
-		case 7: technode =  10; 
+		case 10: technode =  10; 
 		sizingfactor_MUX=  80;
 		switchmatrixsizeratio=0.2;
 		buffernumber = 0 ; 
 
 		break;  
-		case 8: technode = 7; 
+		case 7: technode = 7; 
 		sizingfactor_MUX=  60;
 		switchmatrixsizeratio=0.2;
 		buffernumber = 0 ; 
 
 		break;  
-		case 9: technode =  5; 
+		case 5: technode =  5; 
 		sizingfactor_MUX=  50;
 		switchmatrixsizeratio = 0.06;
 		buffernumber = 0 ; 
 
 		break;  
-		case 10: technode =  3;  
+		case 3: technode =  3;  
 		sizingfactor_MUX=  25;
 		switchmatrixsizeratio = 0.03;
 		buffernumber = 0;
 
 		break; 
-		case 11: technode =  2;  
+		case 2: technode =  2;  
 		sizingfactor_MUX=  25;
 		switchmatrixsizeratio = 0.1;
 		buffernumber = 3 ; 
 		buffersizeratio = 3;
 
 		break;  
-		case 13: technode =  1; 
+		case 1: technode =  1; 
 		sizingfactor_MUX=  30;
 		switchmatrixsizeratio= 0.1 ;
 		buffernumber = 3 ; 

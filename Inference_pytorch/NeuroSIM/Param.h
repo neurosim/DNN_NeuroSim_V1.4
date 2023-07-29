@@ -132,6 +132,8 @@ public:
 	double rowdelay;
 	double muxdelay;
 	
+	// 1.4 update: technology node
+	int technologynode;
 
 	// Anni update: partial parallel mode
 	int numRowParallel;
