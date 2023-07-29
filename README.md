@@ -101,9 +101,9 @@ conda activate neurosim
 ```
 1. VGG8 on cifar10 
    8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
-3. DenseNet40 on cifar10 
+2. DenseNet40 on cifar10 
    8-bit "WAGE" mode pretrained model is uploaded to './log/DenseNet40.pth'
-5. ResNet18 on imagenet 
+3. ResNet18 on imagenet 
    "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
 ```
 
