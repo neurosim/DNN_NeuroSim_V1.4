@@ -25,8 +25,8 @@ The following is a list of the supported nodes with key features:
 
 ### To select a technology node:
 ```
-modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
-For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
+modify the "technologynode" parameter (line 156 in Param.cpp) to match the desired case
+For example technologynode = 22 corresponds to a technode of 22nm and technologynode = 14 corresponds to 14nm.
 
 For additional details about the device parameters used in NeuroSim, refer to section 7 of the V1.4 manual.
 ```
