@@ -95,7 +95,7 @@ Param::Param() {
 	reLu = true;                // false: sigmoid
 								// true: reLu
 								
-	novelMapping = false;        // false: conventional mapping
+	novelMapping = true;        // false: conventional mapping
 								// true: novel mapping
 								
 	SARADC = false;              // false: MLSA
