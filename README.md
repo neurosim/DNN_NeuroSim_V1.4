@@ -56,6 +56,7 @@ We recommend using anaconda package manager to install PyTorch.
 This version supports the recently released PyTorch 2.0
 
 We have currently tested the following CUDA drivers:
+
 (1) 
 Red Hat 8.8 (Ootpa)
 gcc: v8.5.0
@@ -128,12 +129,16 @@ python inference.py --dataset imagenet --model ResNet18 --mode FP --inference 1 
 <br/>
 
 **_For estimation of on-chip training accelerators, please visit released V2.1 [DNN+NeuroSim V2.1](https://github.com/neurosim/DNN_NeuroSim_V2.1)_**
+```
+NOTE: the on-chip training framework has not yet been updated to support the features released in this version (DNN+NeuroSim V1.4).
 
+We plan to support the technology scaling to 1nm, partial parallel mode and the XY bus in a future update.  
+```
 In Pytorch/Tensorflow wrapper, users are able to define **_network structures, precision of synaptic weight and neural activation_**. With the integrated NeuroSim which takes real traces from wrapper, the framework can support hierarchical organization from device level to circuit level, to chip level and to algorithm level, enabling **_instruction-accurate evaluation on both accuracy and hardware performance of inference_**.
 
 Developers: [Junmo Lee](mailto:junmolee@gatech.edu) :two_men_holding_hands: [James Read](mailto:jread6@gatech.edu) :two_men_holding_hands: [Anni Lu](mailto:alu75@gatech.edu) :two_women_holding_hands: [Xiaochen Peng](mailto:xpeng76@gatech.edu) :two_women_holding_hands: [Shanshi Huang](mailto:shuang406@gatech.edu).
 
-This research is supported by NSF CAREER award, NSF/SRC E2CDA program, PRISM center and CHIMES center, both part of the SRC/DARPA JUMP 2.0 program.
+This research is supported by NSF CAREER award, NSF/SRC E2CDA program, the ASCENT center (SRC/DARPA JUMP 1.0) and the PRISM and CHIMES centers (SRC/DARPA JUMP 2.0).
 
 If you use the tool or adapt the tool in your work or publication, you are required to cite the following reference:
 
