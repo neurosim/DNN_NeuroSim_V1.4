@@ -123,14 +123,8 @@ Param::Param() {
 	/*** conventional hardware design options ***/
 	clkFreq = 1e9;                      // Clock frequency
 	temp = 300;                         // Temperature (K)
-	// technode: 130	 --> wireWidth: 175
-	// technode: 90		 --> wireWidth: 110
-	// technode: 65      --> wireWidth: 105
-	// technode: 45      --> wireWidth: 80
-	// technode: 32      --> wireWidth: 56
-	// technode: 22      --> wireWidth: 40
-	// technode: 14      --> wireWidth: 25
-	// technode: 10, 7   --> wireWidth: 18
+
+	technode = 22;					    // Technology node (nm)
 	
 	// 1.4 update: Activation implementation option added
 	Activationtype=false; // true: SRAM, False: RRAM
@@ -150,87 +144,76 @@ Param::Param() {
 	buffernumber=0;
 	buffersizeratio=0;		
 
-
-
-// For Linux Automation (test for 1.4 update)
-const int 
-tech=5;
-
 	// 1.4 update: new technology node added
 	// recommended buffer/driver sizings for MUX, WLdecoder, switchmatrix are provided for each technology node
 	// sizingfactor_WLdecoder needs to be adjusted to reduce SRAM WL delay
 
-	switch (tech){
-		case 0: technode = 130; 
-		
+	switch (technode){ 
+		case 22: 
+		sizingfactor_MUX = 110;  
+		newswitchmatrixsizeratio = 14;
+		switchmatrixsizeratio = 0.2;		
+		buffernumber = 0; 
+		break; 
+
+		case 14:
+		sizingfactor_MUX = 130;
+		switchmatrixsizeratio = 0.2;
+		buffernumber = 0;
 		break;  
-		case 1: technode =  90; 
-		
+
+		case 10:
+		sizingfactor_MUX = 80;
+		switchmatrixsizeratio = 0.2;
+		buffernumber = 0; 
 		break;  
-		case 2: technode =  65; 
-		
+
+		case 7:
+		sizingfactor_MUX = 60;
+		switchmatrixsizeratio = 0.2;
+		buffernumber = 0; 
 		break;  
-		case 3: technode =  45; 
-		
+
+		case 5:
+		sizingfactor_MUX = 50;
+		switchmatrixsizeratio = 0.06;
+		buffernumber = 0; 
 		break;  
-		case 4: technode =  32; 
-		
 		break;  
 		case 5: technode =  22; 
 		sizingfactor_MUX=   110;  
 		newswitchmatrixsizeratio = 14;
 		switchmatrixsizeratio=0.2;		
 		buffernumber = 0 ; 
-
-		break; 
-		case 6:technode =  14; 
-		sizingfactor_MUX=  130;
-		switchmatrixsizeratio=0.2;
-		buffernumber = 0 ; 
-		
-
-		break;  
-		case 7: technode =  10; 
-		sizingfactor_MUX=  80;
-		switchmatrixsizeratio=0.2;
+		break;
+		case 5: technode =  22; 
+		sizingfactor_MUX=   110;  
+		newswitchmatrixsizeratio = 14;
+		switchmatrixsizeratio=0.2;		
 		buffernumber = 0 ; 
 
-		break;  
-		case 8: technode = 7; 
-		sizingfactor_MUX=  60;
-		switchmatrixsizeratio=0.2;
-		buffernumber = 0 ; 
-
-		break;  
-		case 9: technode =  5; 
-		sizingfactor_MUX=  50;
-		switchmatrixsizeratio = 0.06;
-		buffernumber = 0 ; 
-
-		break;  
-		case 10: technode =  3;  
-		sizingfactor_MUX=  25;
-		switchmatrixsizeratio = 0.03;
+		case 3:
+		sizingfactor_MUX = 25;
+		switchmatrixsizeratio =0.03;
 		buffernumber = 0;
-
 		break; 
-		case 11: technode =  2;  
-		sizingfactor_MUX=  25;
+
+		case 2: 
+		sizingfactor_MUX = 25;
 		switchmatrixsizeratio = 0.1;
-		buffernumber = 3 ; 
+		buffernumber = 3; 
 		buffersizeratio = 3;
-
 		break;  
-		case 13: technode =  1; 
-		sizingfactor_MUX=  30;
-		switchmatrixsizeratio= 0.1 ;
-		buffernumber = 3 ; 
-		buffersizeratio = 3;
 
+		case 1:
+		sizingfactor_MUX = 30;
+		switchmatrixsizeratio = 0.1;
+		buffernumber = 3; 
+		buffersizeratio = 3;
 		break; 
 	} 
 
-// 1.4 update: new wire width, barrierthickness
+	// 1.4 update: new wire width, barrierthickness
 
 	switch (technode){
 		case 130: 	Metal0 = 175; Metal1 = 175; wireWidth = 175; barrierthickness = 10.0e-9 ; featuresize = wireWidth*1e-9; break;  
@@ -323,7 +306,7 @@ tech=5;
 	numColMuxed=numColPerSynapse;
 	}
 	
-	levelOutput = 16;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
+	levelOutput = 32;                   // # of levels of the multilevelSenseAmp output, should be in 2^N forms; e.g. 32 levels --> 5-bit ADC
 	cellBit = 1;                        // precision of memory device 
 	// 1.4 update: dummy column sharing - how many senseamplfiers share one dummny columns?
 	// dummy column sharing should not be high, since it could change the column cap of the dummy column.

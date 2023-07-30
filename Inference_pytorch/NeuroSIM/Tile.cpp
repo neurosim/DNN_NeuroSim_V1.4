@@ -447,7 +447,7 @@ void TileCalculatePerformance(const vector<vector<double> > &newMemory, const ve
 
 			// Anni update: PEleakageSRAMInUse
 			ProcessingUnitCalculatePerformance(subArrayInPE, pEMemory, pEMemory, pEInput, 1, 1, numSubArrayRow, numSubArrayCol, weightMatrixRow/numPE,
-									weightMatrixCol, numInVector, cell, true, &PEreadLatency, &PEreadDynamicEnergy, &PEleakage, &PEleakageSRAMInUse,
+									weightMatrixCol, numInVector, cell, false, &PEreadLatency, &PEreadDynamicEnergy, &PEleakage, &PEleakageSRAMInUse,
 									&PEbufferLatency, &PEbufferDynamicEnergy, &PEicLatency, &PEicDynamicEnergy, 
 									&peLatencyADC, &peLatencyAccum, &peLatencyOther, &peEnergyADC, &peEnergyAccum, &peEnergyOther, CalculateclkFreq, clkPeriod);
 
