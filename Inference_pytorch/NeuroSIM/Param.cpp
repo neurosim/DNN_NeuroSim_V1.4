@@ -153,49 +153,31 @@ Param::Param() {
 		sizingfactor_MUX = 110;  
 		newswitchmatrixsizeratio = 14;
 		switchmatrixsizeratio = 0.2;		
-		buffernumber = 0; 
 		break; 
 
 		case 14:
 		sizingfactor_MUX = 130;
 		switchmatrixsizeratio = 0.2;
-		buffernumber = 0;
 		break;  
 
 		case 10:
 		sizingfactor_MUX = 80;
 		switchmatrixsizeratio = 0.2;
-		buffernumber = 0; 
 		break;  
 
 		case 7:
 		sizingfactor_MUX = 60;
 		switchmatrixsizeratio = 0.2;
-		buffernumber = 0; 
 		break;  
 
 		case 5:
 		sizingfactor_MUX = 50;
 		switchmatrixsizeratio = 0.06;
-		buffernumber = 0; 
 		break;  
-		break;  
-		case 5: technode =  22; 
-		sizingfactor_MUX=   110;  
-		newswitchmatrixsizeratio = 14;
-		switchmatrixsizeratio=0.2;		
-		buffernumber = 0 ; 
-		break;
-		case 5: technode =  22; 
-		sizingfactor_MUX=   110;  
-		newswitchmatrixsizeratio = 14;
-		switchmatrixsizeratio=0.2;		
-		buffernumber = 0 ; 
 
 		case 3:
 		sizingfactor_MUX = 25;
 		switchmatrixsizeratio =0.03;
-		buffernumber = 0;
 		break; 
 
 		case 2: 

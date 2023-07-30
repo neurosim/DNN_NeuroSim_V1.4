@@ -1,0 +1,30 @@
+=================FLAGS==================
+dataset: cifar10
+model: VGG8
+mode: WAGE
+batch_size: 500
+epochs: 200
+grad_scale: 8
+seed: 117
+log_interval: 100
+test_interval: 1
+logdir: log/default/ADCprecision=5/batch_size=500/cellBit=1/dataset=cifar10/decreasing_lr=140,180/detect=0/grad_scale=8/inference=0/lr=0.01/mode=WAGE/model=VGG8/onoffratio=10/parallelRead=128/seed=117/subArray=128/t=0/target=0/v=0/vari=0.0/wl_activate=8/wl_error=8/wl_grad=8/wl_weight=8
+lr: 0.01
+decreasing_lr: 140,180
+wl_weight: 8
+wl_grad: 8
+wl_activate: 8
+wl_error: 8
+inference: 0
+subArray: 128
+parallelRead: 128
+ADCprecision: 5
+cellBit: 1
+onoffratio: 10
+vari: 0.0
+t: 0
+v: 0
+detect: 0
+target: 0
+========================================
+Test set: Average loss: 1.5865, Accuracy: 9025/10000 (90%)

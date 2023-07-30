@@ -25,8 +25,8 @@ The following is a list of the supported nodes with key features:
 
 ### To select a technology node:
 ```
-modify the "tech" parameter (line 159 in Param.cpp) to match the desired case
-For example tech = 5 corresponds to a technode of 22nm and tech = 6 corresponds to 14nm.
+modify the "technologynode" parameter (line 156 in Param.cpp) to match the desired case
+For example technologynode = 22 corresponds to a technode of 22nm and technologynode = 14 corresponds to 14nm.
 
 For additional details about the device parameters used in NeuroSim, refer to section 7 of the V1.4 manual.
 ```
@@ -56,6 +56,7 @@ We recommend using anaconda package manager to install PyTorch.
 This version supports the recently released PyTorch 2.0
 
 We have currently tested the following CUDA drivers:
+
 (1) 
 Red Hat 8.8 (Ootpa)
 gcc: v8.5.0
@@ -70,34 +71,34 @@ glibc: v2.31
 NVIDIA Driver Version: 525.60.13
 CUDA Version: 12.0
 
-1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
-2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
+### 1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
+### 2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
 
-3. Get the tool from GitHub
+### 3. Get the tool from GitHub
 ```
 git clone https://github.com/neurosim/DNN_NeuroSim_V1.4.git
 cd DNN_NeuroSim_V1.4
 ```
 
-4. Create a conda environment
+### 4. Create a conda environment
 
 ```
 conda create --name neurosim
 ```
 
-5. Download and install PyTorch packages
+### 5. Download and install PyTorch packages
 
 ```
 conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
-6. Activate neurosim environment
+### 6. Activate neurosim environment
 
 ```
 conda activate neurosim
 ```
 
-7. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
+### 7. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
 ```
 1. VGG8 on cifar10 
    8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
@@ -107,15 +108,15 @@ conda activate neurosim
    "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
 ```
 
-8. (Optional) Train the network to get the model for inference
+### 8. (Optional) Train the network to get the model for inference
 
-9. Compile the NeuroSim C++ code
+### 9. Compile the NeuroSim C++ code
 ```
 cd Inference_pytorch/NeuroSIM
 make
 ```
 
-10. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
+### 10. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
 
 ```
 cd ..
@@ -128,12 +129,16 @@ python inference.py --dataset imagenet --model ResNet18 --mode FP --inference 1 
 <br/>
 
 **_For estimation of on-chip training accelerators, please visit released V2.1 [DNN+NeuroSim V2.1](https://github.com/neurosim/DNN_NeuroSim_V2.1)_**
+```
+NOTE: the on-chip training framework has not yet been updated to support the features released in this version (DNN+NeuroSim V1.4).
 
+We plan to support the technology scaling to 1nm, partial parallel mode and the XY bus in a future update.  
+```
 In Pytorch/Tensorflow wrapper, users are able to define **_network structures, precision of synaptic weight and neural activation_**. With the integrated NeuroSim which takes real traces from wrapper, the framework can support hierarchical organization from device level to circuit level, to chip level and to algorithm level, enabling **_instruction-accurate evaluation on both accuracy and hardware performance of inference_**.
 
-Developers: [Junmo Lee](mailto:junmolee@gatech.edu) :two_men_holding_hands: [James Read](mailto:jread6@gatech.edu) :two_men_holding_hands: [Anni Lu](mailto:alu75@gatech.edu) :two_women_holding_hands: [Xiaochen Peng](mailto:xpeng76@gatech.edu) :two_women_holding_hands: [Shanshi Huang](mailto:shuang406@gatech.edu).
+Developers: [Junmo Lee](mailto:junmolee@gatech.edu) :two_men_holding_hands: [James Read](mailto:jread6@gatech.edu) :couple: [Anni Lu](mailto:alu75@gatech.edu) :two_women_holding_hands: [Xiaochen Peng](mailto:xpeng76@gatech.edu) :two_women_holding_hands: [Shanshi Huang](mailto:shuang406@gatech.edu).
 
-This research is supported by NSF CAREER award, NSF/SRC E2CDA program, PRISM center and CHIMES center, both part of the SRC/DARPA JUMP 2.0 program.
+This research is supported by NSF CAREER award, NSF/SRC E2CDA program, the ASCENT center (SRC/DARPA JUMP 1.0) and the PRISM and CHIMES centers (SRC/DARPA JUMP 2.0).
 
 If you use the tool or adapt the tool in your work or publication, you are required to cite the following reference:
 
