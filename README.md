@@ -71,34 +71,34 @@ glibc: v2.31
 NVIDIA Driver Version: 525.60.13
 CUDA Version: 12.0
 
-1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
-2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
+# 1. Download Anaconda/Miniconda: https://docs.conda.io/en/latest/miniconda.html
+# 2. Follow install instructions: https://docs.conda.io/en/latest/miniconda.html#installing
 
-3. Get the tool from GitHub
+# 3. Get the tool from GitHub
 ```
 git clone https://github.com/neurosim/DNN_NeuroSim_V1.4.git
 cd DNN_NeuroSim_V1.4
 ```
 
-4. Create a conda environment
+# 4. Create a conda environment
 
 ```
 conda create --name neurosim
 ```
 
-5. Download and install PyTorch packages
+# 5. Download and install PyTorch packages
 
 ```
 conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
-6. Activate neurosim environment
+# 6. Activate neurosim environment
 
 ```
 conda activate neurosim
 ```
 
-7. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
+# 7. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
 ```
 1. VGG8 on cifar10 
    8-bit "WAGE" mode pretrained model is uploaded to './log/VGG8.pth'
@@ -108,15 +108,15 @@ conda activate neurosim
    "FP" mode pretrained model is loaded from 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
 ```
 
-8. (Optional) Train the network to get the model for inference
+# 8. (Optional) Train the network to get the model for inference
 
-9. Compile the NeuroSim C++ code
+# 9. Compile the NeuroSim C++ code
 ```
 cd Inference_pytorch/NeuroSIM
 make
 ```
 
-10. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
+# 10. Run Pytorch/Tensorflow wrapper (integrated with NeuroSim). The following are some examples with arguments.
 
 ```
 cd ..
