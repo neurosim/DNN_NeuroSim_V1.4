@@ -149,68 +149,32 @@ Param::Param() {
 	// sizingfactor_WLdecoder needs to be adjusted to reduce SRAM WL delay
 
 	switch (technode){ 
-		case 22: 
-		sizingfactor_MUX = 110;  
-		newswitchmatrixsizeratio = 14;
-		switchmatrixsizeratio = 0.2;		
-		break; 
-
-		case 14:
-		sizingfactor_MUX = 130;
-		switchmatrixsizeratio = 0.2;
-		break;  
-
-		case 10:
-		sizingfactor_MUX = 80;
-		switchmatrixsizeratio = 0.2;
-		break;  
-
-		case 7:
-		sizingfactor_MUX = 60;
-		switchmatrixsizeratio = 0.2;
-		break;  
-
-		case 5:
-		sizingfactor_MUX = 50;
-		switchmatrixsizeratio = 0.06;
-		break;  
-
-		case 3:
-		sizingfactor_MUX = 25;
-		switchmatrixsizeratio =0.03;
-		break; 
-
-		case 2: 
-		sizingfactor_MUX = 25;
-		switchmatrixsizeratio = 0.1;
-		buffernumber = 3; 
-		buffersizeratio = 3;
-		break;  
-
-		case 1:
-		sizingfactor_MUX = 30;
-		switchmatrixsizeratio = 0.1;
-		buffernumber = 3; 
-		buffersizeratio = 3;
-		break; 
+		case 22:	sizingfactor_MUX=110; newswitchmatrixsizeratio=14; switchmatrixsizeratio=0.2; break; 
+		case 14:	sizingfactor_MUX=130; switchmatrixsizeratio=0.2;  break;  
+		case 10:	sizingfactor_MUX=80;  switchmatrixsizeratio=0.2;  break;  
+		case 7:		sizingfactor_MUX=60;  switchmatrixsizeratio=0.2;  break;  
+		case 5:		sizingfactor_MUX=50;  switchmatrixsizeratio=0.06; break;  
+		case 3:		sizingfactor_MUX=25;  switchmatrixsizeratio=0.03; break; 
+		case 2:		sizingfactor_MUX=25;  switchmatrixsizeratio=0.1; buffernumber=3; buffersizeratio=3; break;  
+		case 1:		sizingfactor_MUX=30;  switchmatrixsizeratio=0.1; buffernumber=3; buffersizeratio=3; break; 
 	} 
 
 	// 1.4 update: new wire width, barrierthickness
 
 	switch (technode){
-		case 130: 	Metal0 = 175; Metal1 = 175; wireWidth = 175; barrierthickness = 10.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 90: 	Metal0 = 110; Metal1 = 110; wireWidth=110; barrierthickness = 10.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 65:	Metal0 = 105; Metal1 = 105; wireWidth=105; barrierthickness = 7.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 45:	Metal0 = 80; Metal1 = 80; wireWidth=80; barrierthickness = 5.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 32:	Metal0 = 56; Metal1 = 56; wireWidth=56; barrierthickness = 4.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 22:	Metal0 = 40; Metal1 = 40; wireWidth=40; barrierthickness = 2.5e-9 ; featuresize = wireWidth*1e-9; break; 
-		case 14:	Metal0 = 32; Metal1 = 39; wireWidth=32; barrierthickness = 2.5e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 10:	Metal0 = 22; Metal1 = 32; wireWidth=22; barrierthickness = 2.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 7:		Metal0 = 20; Metal1 = 28.5; wireWidth=20; barrierthickness = 2.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 5:		Metal0 = 15; Metal1 = 17; wireWidth=15; barrierthickness = 2.0e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 3:		Metal0 = 12; Metal1 = 16; wireWidth=12; barrierthickness = 1.5e-9 ; featuresize = wireWidth*1e-9; break; 
-		case 2:		Metal0 = 10; Metal1 = 11.5; wireWidth=10; barrierthickness = 0.5e-9 ; featuresize = wireWidth*1e-9; break;  
-		case 1:		Metal0 = 8; Metal1 = 10; wireWidth=8; barrierthickness = 0.2e-9 ; featuresize = wireWidth*1e-9; break;    
+		case 130: 	Metal0=175; Metal1=175; wireWidth=175; barrierthickness=10.0e-9; featuresize = wireWidth*1e-9; break;  
+		case 90: 	Metal0=110; Metal1=110; wireWidth=110; barrierthickness=10.0e-9; featuresize = wireWidth*1e-9; break;  
+		case 65:	Metal0=105; Metal1=105; wireWidth=105; barrierthickness=7.0e-9;  featuresize = wireWidth*1e-9; break;  
+		case 45:	Metal0=80; Metal1=80;   wireWidth=80;  barrierthickness=5.0e-9;  featuresize = wireWidth*1e-9; break;  
+		case 32:	Metal0=56; Metal1=56;   wireWidth=56;  barrierthickness=4.0e-9;  featuresize = wireWidth*1e-9; break;  
+		case 22:	Metal0=40; Metal1=40;   wireWidth=40;  barrierthickness=2.5e-9;  featuresize = wireWidth*1e-9; break; 
+		case 14:	Metal0=32; Metal1=39;   wireWidth=32;  barrierthickness=2.5e-9;  featuresize = wireWidth*1e-9; break;  
+		case 10:	Metal0=22; Metal1=32;   wireWidth=22;  barrierthickness=2.0e-9;  featuresize = wireWidth*1e-9; break;  
+		case 7:		Metal0=20; Metal1=28.5; wireWidth=20;  barrierthickness=2.0e-9;  featuresize = wireWidth*1e-9; break;  
+		case 5:		Metal0=15; Metal1=17;   wireWidth=15;  barrierthickness=2.0e-9;  featuresize = wireWidth*1e-9; break;  
+		case 3:		Metal0=12; Metal1=16;   wireWidth=12;  barrierthickness=1.5e-9;  featuresize = wireWidth*1e-9; break; 
+		case 2:		Metal0=10; Metal1=11.5; wireWidth=10;  barrierthickness=0.5e-9;  featuresize = wireWidth*1e-9; break;  
+		case 1:		Metal0=8;  Metal1=10;   wireWidth=8;   barrierthickness=0.2e-9;  featuresize = wireWidth*1e-9; break;    
 		case -1:	break;	
 		default:	exit(-1); puts("Wire width out of range"); 
 	}

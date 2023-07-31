@@ -25,8 +25,8 @@ The following is a list of the supported nodes with key features:
 
 ### To select a technology node:
 ```
-modify the "technologynode" parameter (line 156 in Param.cpp) to match the desired case
-For example technologynode = 22 corresponds to a technode of 22nm and technologynode = 14 corresponds to 14nm.
+modify the "technnode" parameter (line 127 in Param.cpp) to match the desired case
+For example technnode = 22 corresponds to a technode of 22nm and technnode = 14 corresponds to 14nm.
 
 For additional details about the device parameters used in NeuroSim, refer to section 7 of the V1.4 manual.
 ```
@@ -55,7 +55,7 @@ We recommend using anaconda package manager to install PyTorch.
 
 This version supports the recently released PyTorch 2.0
 
-We have currently tested the following CUDA drivers:
+We have currently tested the following operating systems and drivers:
 
 (1) 
 Red Hat 8.8 (Ootpa)
