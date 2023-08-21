@@ -81,7 +81,7 @@ void XYBus::Initialize(int _numRow, int _numCol, double _delaytolerance, double 
 	CalculateGateArea(INV, 1, MIN_NMOS_SIZE * tech.featureSize * repeaterSize, tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize * repeaterSize, tech.featureSize * MAX_TRANSISTOR_HEIGHT, tech, &hRep, &wRep);
 	CalculateGateCapacitance(INV, 1, MIN_NMOS_SIZE * tech.featureSize * repeaterSize, tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize * repeaterSize, hRep, tech, &capRepInput, &capRepOutput);
 	resOnRep = (CalculateOnResistance(MIN_NMOS_SIZE * tech.featureSize * repeaterSize, NMOS, inputParameter.temperature, tech) + CalculateOnResistance(tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize * repeaterSize, PMOS, inputParameter.temperature, tech))/2;
-	double minUnitLengthDelay = 0.7*(resOnRep*(capRepInput+capRepOutput+unitLengthWireCap*minDist))+0.38*unitLengthWireResistance*minDist*unitLengthWireCap*minDist+unitLengthWireResistance*minDist*capRepInput/minDist;
+	double minUnitLengthDelay = 0.7*(resOnRep*(capRepInput+capRepOutput+unitLengthWireCap*minDist)+0.54*unitLengthWireResistance*minDist*unitLengthWireCap*minDist+unitLengthWireResistance*minDist*capRepInput)/minDist;
 	double maxUnitLengthEnergy = (capRepInput+capRepOutput+unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist;
 	
 	if (delaytolerance) {   // tradeoff: increase delay to decrease energy
@@ -93,7 +93,7 @@ void XYBus::Initialize(int _numRow, int _numCol, double _delaytolerance, double 
 			CalculateGateArea(INV, 1, MIN_NMOS_SIZE * tech.featureSize * repeaterSize, tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize * repeaterSize, tech.featureSize * MAX_TRANSISTOR_HEIGHT, tech, &hRep, &wRep);
 			CalculateGateCapacitance(INV, 1, MIN_NMOS_SIZE * tech.featureSize * repeaterSize, tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize * repeaterSize, hRep, tech, &capRepInput, &capRepOutput);
 			resOnRep = (CalculateOnResistance(MIN_NMOS_SIZE * tech.featureSize * repeaterSize, NMOS, inputParameter.temperature, tech) + CalculateOnResistance(tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize * repeaterSize, PMOS, inputParameter.temperature, tech))/2;
-			delay = 0.7*(resOnRep*(capRepInput+capRepOutput+unitLengthWireCap*minDist))+0.38*unitLengthWireResistance*minDist*unitLengthWireCap*minDist+unitLengthWireResistance*minDist*capRepInput/minDist;
+			delay = 0.7*(resOnRep*(capRepInput+capRepOutput+unitLengthWireCap*minDist)+0.54*unitLengthWireResistance*minDist*unitLengthWireCap*minDist+unitLengthWireResistance*minDist*capRepInput)/minDist;
 			energy = (capRepInput+capRepOutput+unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist;
 		}
 	}
@@ -158,7 +158,7 @@ void XYBus::CalculateLatency(int x_end, int y_init, double unitHeight, double un
 		double resOnRep = (CalculateOnResistance(widthInvN, NMOS, inputParameter.temperature, tech) + CalculateOnResistance(widthInvP, PMOS, inputParameter.temperature, tech))/2;
 
 		// for input: X Bus
-        unitLatencyRep = 0.7*(resOnRep*(capInvInput+capInvOutput+unitLengthWireCap*minDist))+0.38*unitLengthWireResistanceH*minDist*unitLengthWireCap*minDist+unitLengthWireResistanceH*minDist*capInvInput/minDist;
+        unitLatencyRep = 0.7*(resOnRep*(capInvInput+capInvOutput+unitLengthWireCap*minDist)+0.54*unitLengthWireResistanceH*minDist*unitLengthWireCap*minDist+unitLengthWireResistanceH*minDist*capInvInput)/minDist;
         unitLatencyWire = 0.7*unitLengthWireResistanceH*minDist*unitLengthWireCap*minDist/minDist;
         numRepeater = ceil(wireLengthH/minDist);
 
@@ -171,7 +171,7 @@ void XYBus::CalculateLatency(int x_end, int y_init, double unitHeight, double un
 			readLatencyInput = ceil(readLatencyInput*clkFreq);
 		}
 		// for output: Y Bus
-        unitLatencyRep = 0.7*(resOnRep*(capInvInput+capInvOutput+unitLengthWireCap*minDist))+0.38*unitLengthWireResistanceV*minDist*unitLengthWireCap*minDist+unitLengthWireResistanceV*minDist*capInvInput/minDist;
+        unitLatencyRep = 0.7*(resOnRep*(capInvInput+capInvOutput+unitLengthWireCap*minDist)+0.54*unitLengthWireResistanceV*minDist*unitLengthWireCap*minDist+unitLengthWireResistanceV*minDist*capInvInput)/minDist;
         unitLatencyWire = 0.7*unitLengthWireResistanceV*minDist*unitLengthWireCap*minDist/minDist;
         numRepeater = ceil(wireLengthV/minDist);
         if (numRepeater > 0) {
