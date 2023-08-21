@@ -346,7 +346,7 @@ void MultilevelSenseAmp::CalculatePower(const vector<double> &columnResistance, 
 
 					else if (param->technode == 1) {Vread=0.272;}
 
-					double Column_SwitchingE = (param->columncap * 2) * (1+1/(param->dumcolshared))/2 * pow(Vread,2) // switching at the senseamp-column interface (column cap)
+					double Column_SwitchingE = (param->columncap * 2) * (1/(levelOutput-1)+1/(param->dumcolshared))/2 * pow(Vread,2) // switching at the senseamp-column interface (column cap)
 					+ param->reference_energy_peri/(param->dumcolshared) // reference column activation energy					
 					+ (gatecap_senseamp_N  * 2 + (junctioncap_senseamp_N)/(levelOutput-1) +  (junctioncap_senseamp_N)/(param->dumcolshared)) * pow(Vread,2) // switching at the senseamp-column interface (input/mirror cap)
 					// since ref_voltage is assumed to be very small, the energy consumption of the corresponding transistor is negligible
