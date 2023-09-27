@@ -103,9 +103,14 @@ void HTree::Initialize(int _numRow, int _numCol, double _delaytolerance, double 
 	widthInvN = MAX(1,repeaterSize) * MIN_NMOS_SIZE * tech.featureSize;
 	widthInvP = MAX(1,repeaterSize) * tech.pnSizeRatio * MIN_NMOS_SIZE * tech.featureSize;
 	
+	// 230920 update
+	numRow = pow(2, (numStage-1)/2);
+	numCol = pow(2, (numStage-1)/2);
+
 	/*** define center point ***/
-	x_center = floor(log2((double) min(numRow, numCol)));
-	y_center = floor(log2((double) min(numRow, numCol)));
+	x_center = numRow/2.0;
+	y_center = numCol/2.0;
+
 	int orc = 1;    // over-routing constraint: (important for unbalanced tree) avoid routing outside chip boundray
 	
 	if (numCol-x_center<orc) {
@@ -292,6 +297,8 @@ void HTree::CalculateLatency(int x_init, int y_init, int x_end, int y_end, doubl
 		}
 		
 		if (param->synchronous) {
+			// 230920 update
+			critical_latency=readLatency*clkFreq;
 			readLatency = ceil(readLatency*clkFreq);
 		}
 		readLatency *= numRead; 	
@@ -306,7 +313,8 @@ void HTree::CalculatePower(int x_init, int y_init, int x_end, int y_end, double 
 		readDynamicEnergy = 0;
 		
 		unitLengthLeakage = CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd / minDist;
-		leakage = unitLengthLeakage * totalWireLength;
+		// 230920 update
+		leakage = unitLengthLeakage * totalWireLength* numBitAccess;
 
 		// 1.4 update -updated interconnect energy
 		unitLengthEnergyRep = (capInvInput+capInvOutput+unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist * 0.5;

@@ -167,8 +167,9 @@ void Buffer::CalculateLatency(double numAccessBitRead, double numRead, double nu
 		writeWholeLatency = 0;
 		
 		if (param->synchronous) {
-			readLatency = numRead/2;		// read 1 line per cycle
-			writeLatency = numWrite/2;
+			// 230920 updated 
+			readLatency = numRead;		// read 1 line per cycle
+			writeLatency = numWrite;
 		} else {
 			if (SRAM) {
 				// 1.4 update
@@ -239,13 +240,15 @@ void Buffer::CalculatePower(double numAccessBitRead, double numRead, double numA
 
 		} else {
 			wlDecoder.CalculatePower(numBit/interface_width, numBit/interface_width);
-			dff.CalculatePower(1, numBit, false);
+			// 230920 update
+			dff.CalculatePower(1, numBit, true);
 			
 			readWholeDynamicEnergy += wlDecoder.readDynamicEnergy + dff.readDynamicEnergy;
 			writeWholeDynamicEnergy += wlDecoder.writeDynamicEnergy + dff.writeDynamicEnergy;
 			
-			readWholeDynamicEnergy = readWholeDynamicEnergy/2;
-			writeWholeDynamicEnergy = writeWholeDynamicEnergy/2;
+			// 230920 updated 
+			readWholeDynamicEnergy = readWholeDynamicEnergy;
+			writeWholeDynamicEnergy = writeWholeDynamicEnergy;
 
 			leakage += dff.leakage;
 			leakage += wlDecoder.leakage;

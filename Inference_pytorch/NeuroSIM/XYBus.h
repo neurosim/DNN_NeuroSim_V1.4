@@ -73,6 +73,11 @@ public:
 	double unitLatencyRep, unitLatencyWire, unitLengthLeakage, unitLengthEnergyRep, unitLengthEnergyWire;
     double wireWidthH, unitLengthWireResistanceH, wireWidthV, unitLengthWireResistanceV;
 	double clkFreq;
+
+	// 230920 update
+	double critical_latency;
+
+
 };
 
 #endif /* HTREE_H_ */

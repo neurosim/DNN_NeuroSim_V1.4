@@ -109,7 +109,7 @@ public:
 	double drivecapin; 
 	double buffernumber=0;
 	double buffersizeratio=0;
-
+	
 	// 1.4 update: barrier thickness
 	double barrierthickness= 0;
 	
@@ -137,6 +137,10 @@ public:
 
 	// Anni update: partial parallel mode
 	int numRowParallel;
+
+	// 230920 update
+	double totaltile_num;
+	int sync_data_transfer;
 };
 
 #endif

@@ -92,9 +92,10 @@ void MultilevelSAEncoder::CalculateArea(double _newHeight, double _newWidth, Are
 		// Large NAND in Encoder
 		CalculateGateArea(NAND, numInput, widthNandN, widthNandP, tech.featureSize * MAX_TRANSISTOR_HEIGHT, tech, &hNandLg, &wNandLg);
 		
-		wEncoder = 2*wInv + wNand + wNandLg;
-		hEncoder = max( (numLevel-1)*hInv, (numLevel-1)*hNand );
-	    
+		// 230920 update
+		wEncoder = wInv + wNand + wNandLg; // latch part with two inverters are included in the senseamp estimation
+		hEncoder = ((wInv*hInv + wNand*hNand)*(numLevel-1) + wNandLg*numGate*hNandLg)/wEncoder  ;
+
 		if (_newWidth && _option==NONE) {
 			int numEncoderPerRow = (int)ceil(_newWidth/wEncoder);
 			if (numEncoderPerRow > numEncoder) {
@@ -198,19 +199,20 @@ void MultilevelSAEncoder::CalculatePower(double numRead) {
 
 
 		// 1.4 update - updated
-		leakage =  CalculateGateLeakage(NAND, 2, widthNandN, widthNandP, inputParameter.temperature, tech) * tech.vdd * (numLevel+numGate) * numEncoder
+		// 230920 update
+		leakage =  CalculateGateLeakage(NAND, 2, widthNandN, widthNandP, inputParameter.temperature, tech) * tech.vdd * (numLevel-1) * numEncoder
 				  + CalculateGateLeakage(NAND, numInput, widthNandN, widthNandP, inputParameter.temperature, tech) * tech.vdd * numGate * numEncoder;
 		
 		if ((tech.featureSize == 2e-9) && param->speciallayout) { 
-			leakage += CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd * 3 * (numLevel) * numEncoder * 1.0/2.0;
+			leakage += CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd * 5 * (numLevel-1) * numEncoder * 1.0/2.0;
 
 		}
 	    else if ((tech.featureSize == 1e-9) && param->speciallayout) {
-			leakage += CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd * 3 * (numLevel) * numEncoder * 10.5/16.0;
+			leakage += CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd * 5 * (numLevel-1) * numEncoder * 10.5/16.0;
 		}
 		
 		else {
-			leakage += CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd * 3 * (numLevel) * numEncoder;
+			leakage += CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd * 5 * (numLevel-1) * numEncoder;
 		}	
 
 		// 1.4 update - updated

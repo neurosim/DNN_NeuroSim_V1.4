@@ -194,13 +194,17 @@ void XYBus::CalculatePower(int x_end, int y_init, double unitHeight, double unit
 		leakage = 0;
 		double readDynamicEnergyInput = 0;
         double readDynamicEnergyOutput = 0;
-		
-		unitLengthLeakage = CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd / minDist;
-		leakage = unitLengthLeakage * totalWireLength;
-		unitLengthEnergyRep = (capInvInput+capInvOutput+unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist*0.5;
-		unitLengthEnergyWire = (unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist*0.5;
+
+		// 230920 update
 		double wireLengthV = unitHeight*(numRow-y_init-1);   // Y Bus
 		double wireLengthH = unitWidth*x_end;    // X Bus
+		totalWireLength = wireLengthH + wireLengthV;
+
+		unitLengthLeakage = CalculateGateLeakage(INV, 1, widthInvN, widthInvP, inputParameter.temperature, tech) * tech.vdd / minDist;
+		leakage = unitLengthLeakage * totalWireLength * busWidth;
+		unitLengthEnergyRep = (capInvInput+capInvOutput+unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist*0.5;
+		unitLengthEnergyWire = (unitLengthWireCap*minDist)*tech.vdd*tech.vdd/minDist*0.5;
+
 		
         // for input: X Bus
         numRepeater = ceil(wireLengthH/minDist);

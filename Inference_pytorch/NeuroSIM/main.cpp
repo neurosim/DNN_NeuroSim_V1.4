@@ -73,10 +73,9 @@ int main(int argc, char * argv[]) {
     param->synapseBit = atoi(argv[2]);              // precision of synapse weight
     param->numBitInput = atoi(argv[3]);             // precision of input neural activation
     param->numRowSubArray = atoi(argv[4]);             // number row of subarray
-
     param->numRowParallel = atoi(argv[5]);             // number of enabled rows of subarray (partial paralle mode)
-    
-    
+
+
     if (param->cellBit > param->synapseBit) {
         cout << "ERROR!: Memory precision is even higher than synapse precision, please modify 'cellBit' in Param.cpp!" << endl;
         param->cellBit = param->synapseBit;
@@ -102,7 +101,15 @@ int main(int argc, char * argv[]) {
         exit(-1);
     }
 
-    
+    if ((param->sync_data_transfer)) {
+    if (!((param->sync_data_transfer) && (param->globalBusType == true) && (param->chipActivation == true) 
+    && (param->novelMapping == true) && (param->pipeline== true) 
+    && (param->synchronous == true) && (param->globalBufferType == false)))
+
+    {   cout << "ERROR!: sync_data_transfer mode not supported for the current parameter combimation!" << endl;
+        exit(-1);
+    }
+    }
 
     /*** initialize operationMode as default ***/
     param->conventionalParallel = 0;
@@ -543,7 +550,8 @@ int main(int argc, char * argv[]) {
 
     /*
     fstream read;
-    read.open("filelocation/filename",fstream::app);    
+    // read.open("filelocation/filename",fstream::app);    
+    read.open("/home/junmo/DNN_NeuroSim_V1.4/Inference_pytorch/NeuroSIM/Data_TechnologyUpdate/overall_metrics.csv",fstream::app); 
     
     // enter the filelocation/filename where you want to store the printed values. 
 

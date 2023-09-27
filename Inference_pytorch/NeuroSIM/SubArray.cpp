@@ -154,7 +154,12 @@ void SubArray::Initialize(int _numRow, int _numCol, double _unitWireRes){  //ini
 		} else {  //if not relax the cell height
 			lengthCol = (double)numRow * cell.heightInFeatureSize * tech.featureSize;
 		}
-	
+
+		// 230920 update
+		param->arraywidthunit = cell.widthInFeatureSize * tech.featureSize;
+		param->arrayheight = (double)numRow * cell.heightInFeatureSize * cell.featureSize;
+
+
 	} else if (cell.memCellType == Type::RRAM ||  cell.memCellType == Type::FeFET) {  //if array is RRAM
 		double cellHeight = cell.heightInFeatureSize; 
 		double cellWidth = cell.widthInFeatureSize;  
@@ -181,6 +186,11 @@ void SubArray::Initialize(int _numRow, int _numCol, double _unitWireRes){  //ini
 				lengthCol = (double)numRow * cellHeight * cell.featureSize;
 			}
 		}
+
+		// 230920 update
+		param->arraywidthunit = cellWidth * cell.featureSize;
+		param->arrayheight = (double)numRow * cellHeight * cell.featureSize;
+
 	}      //finish setting array size
 	
 	// 1.4 update

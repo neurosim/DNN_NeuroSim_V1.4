@@ -154,7 +154,8 @@ void SenseAmp::CalculatePower(double numRead) {
 		// Leakage
 
 		// 1.4 update: for < 14nm compatibility
-		double idleCurrent =  CalculateGateLeakage(INV, 1, ((tech.featureSize <= 14*1e-9)? 2:1)* W_SENSE_EN * tech.featureSize, 0, inputParameter.temperature, tech) * tech.vdd;
+		// 230920 update
+		double idleCurrent =  CalculateGateLeakage(INV, 1, ((tech.featureSize <= 14*1e-9)? 2:1)* W_SENSE_EN * tech.featureSize, 0, inputParameter.temperature, tech);
 		leakage += idleCurrent * tech.vdd * numCol;
 		
 		// Dynamic energy

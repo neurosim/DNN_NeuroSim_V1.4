@@ -78,7 +78,9 @@ void Precharger::CalculateArea(double _newHeight, double _newWidth, AreaModify _
 		area = 0;
 		height = 0;
 		width = 0;
-		double hUnit = hBitlinePrecharger + hBitlineEqual * 2;
+
+		// 230920 update
+		double hUnit = hBitlinePrecharger*2 + hBitlineEqual ;
 		double wUnit = MAX(wBitlinePrecharger, wBitlineEqual);
 
 		if (_newWidth && _option==NONE) {
@@ -154,8 +156,9 @@ void Precharger::CalculatePower(double numRead, double numWrite) {
 		readDynamicEnergy = 0;
 		writeDynamicEnergy = 0;
 		
+		// 230925 update
 		/* Leakage power */
-		leakage = CalculateGateLeakage(INV, 1, 0, widthPMOSBitlinePrecharger, inputParameter.temperature, tech) * tech.vdd * numCol;
+		leakage = 2*CalculateGateLeakage(INV, 1, 0, widthPMOSBitlinePrecharger, inputParameter.temperature, tech) * tech.vdd * numCol;
 
 		/* Dynamic energy */
 		// Read

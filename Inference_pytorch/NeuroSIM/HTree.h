@@ -74,6 +74,10 @@ public:
 	double find_stage;
 	int x_center, y_center, hit, skipVer;
 	double clkFreq;
+
+	// 230920 update
+
+	double critical_latency;
 };
 
 #endif /* HTREE_H_ */

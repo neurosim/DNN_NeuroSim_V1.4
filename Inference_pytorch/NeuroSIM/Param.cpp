@@ -127,7 +127,7 @@ Param::Param() {
 	technode = 22;					    // Technology node (nm)
 	
 	// 1.4 update: Activation implementation option added
-	Activationtype=false; // true: SRAM, False: RRAM
+	Activationtype=true; // true: SRAM, False: RRAM
 
 	// 1.4 update: special layout (for GAA nodes (1, 2, nm) only)
 	speciallayout=1;
@@ -203,6 +203,9 @@ Param::Param() {
 	numRowSubArray = 128;               // # of rows in single subArray
 	numColSubArray = 128;               // # of columns in single subArray
 
+	// 230920 update
+
+	sync_data_transfer=0;
 
 	/*** initialize operationMode as default ***/ 
 	
@@ -343,7 +346,22 @@ Param::Param() {
 	maxConductance = (double) 1/resistanceOn;
 	minConductance = (double) 1/resistanceOff;
 	
-	readVoltage = 0.5;	                // On-chip read voltage for memory cell
+	// 230920 update 
+	// read voltage needed for mux energy calculation - read voltage is fixed for Neurosim1.4, due to the assumptions for the ADC modeling equation (refer to manual for more information)
+	if (technode == 130) {readVoltage=0.58;}
+	else if (technode == 90) {readVoltage=0.58;}
+	else if (technode == 65) {readVoltage=0.55;}
+	else if (technode == 45) {readVoltage=0.51;}
+	else if (technode == 32) {readVoltage=0.51;}
+	else if (technode == 22) {readVoltage=0.55;}
+	else if (technode == 14) {readVoltage=0.277;}
+	else if (technode == 10) {readVoltage=0.28;} 
+	else if (technode == 7) {readVoltage=0.264;}
+	else if (technode == 5) {readVoltage=0.253;}
+	else if (technode == 3) {readVoltage=0.248;}
+	else if (technode == 2) {readVoltage=0.28;}
+	else if (technode == 1) {readVoltage=0.272;}
+
 	readPulseWidth = 10e-9;             // read pulse width in sec
 	accessVoltage = 1.1;                // Gate voltage for the transistor in 1T1R
 	resistanceAccess = resistanceOn*IR_DROP_TOLERANCE;            // resistance of access CMOS in 1T1R
