@@ -86,16 +86,16 @@ cd DNN_NeuroSim_V1.4
 conda create --name neurosim
 ```
 
-### 5. Download and install PyTorch packages
-
-```
-conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
-```
-
-### 6. Activate neurosim environment
+### 5. Activate neurosim environment
 
 ```
 conda activate neurosim
+```
+
+### 6. Download and install PyTorch packages
+
+```
+conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
 ### 7. Pick a network architecture. The following have been pre-trained and provided with NeuroSim.
