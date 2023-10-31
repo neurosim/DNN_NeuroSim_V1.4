@@ -93,7 +93,7 @@ void Buffer::Initialize(int _numBit, int _interface_width, int _num_interface, d
 		resCol = lengthCol * param->Metal1_unitwireresis;
 
 		// 1.4 update: consider overlap capacitance for FinFET
-		if (tech.featureSize <= 14 * 1e-9) capCol += tech.cap_draintotal * cell.widthAccessCMOS * tech.effective_width * numRow;	
+		// if (tech.featureSize <= 14 * 1e-9) capCol += tech.cap_draintotal * cell.widthAccessCMOS * tech.effective_width * numRow;	
 				
 		precharger.Initialize(interface_width, lengthCol * unitWireRes, 1, interface_width, interface_width);
 		sramWriteDriver.Initialize(interface_width, 1, interface_width);
