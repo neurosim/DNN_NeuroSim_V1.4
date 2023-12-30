@@ -678,7 +678,9 @@ vector<double> GetInputVector(const vector<vector<double> > &input, int numInput
 			numofreadrow += 0;
 		}
 	}
-	double totalnumRow = input.size();
+
+	// 122923 update
+	double totalnumRow = param->numRowSubArray;
 	*(activityRowRead) = numofreadrow/totalnumRow;
 	return copy;
 	copy.clear();
