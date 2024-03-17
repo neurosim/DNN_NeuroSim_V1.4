@@ -774,13 +774,13 @@ void CalculateGateCapacitance(
 
 				if (NumNSheet > 0) {
 					if (NumNSheet <= maxNumNSheet) { /* No folding */
-						unitWidthDrainN = tech.featureSize * MIN_GAP_BET_GATE_POLY_FINFET;
+						unitWidthDrainN = tech.featureSize * modified_MIN_GAP_BET_GATE_POLY_FINFET;
 						unitWidthSourceN = unitWidthDrainN;
 						heightDrainN =  NumNSheet * tech.widthFin;
 					} else {    /* Folding */
 						numFoldedNMOS = (int)(ceil(NumNSheet / maxNumNSheet));
-						unitWidthDrainN = (int)ceil((double)(numFoldedNMOS+1)/2) * tech.featureSize * MIN_GAP_BET_GATE_POLY_FINFET;
-						unitWidthSourceN = (int)floor((double)(numFoldedNMOS+1)/2) * tech.featureSize * MIN_GAP_BET_GATE_POLY_FINFET;
+						unitWidthDrainN = (int)ceil((double)(numFoldedNMOS+1)/2) * tech.featureSize * modified_MIN_GAP_BET_GATE_POLY_FINFET;
+						unitWidthSourceN = (int)floor((double)(numFoldedNMOS+1)/2) * tech.featureSize * modified_MIN_GAP_BET_GATE_POLY_FINFET;
 						heightDrainN = maxNumNSheet * tech.widthFin; // modified from heightDrainN = (maxNumNFin-1) * tech.PitchFin + 2 * tech.widthFin/2;
 					}
 				} else {
@@ -1143,13 +1143,13 @@ void CalculateGateCapacitance_GAA(
 
         if (NumNSheet > 0) {
             if (NumNSheet <= maxNumNSheet) { /* No folding */
-                unitWidthDrainN = tech.featureSize * MIN_GAP_BET_GATE_POLY_FINFET;
+                unitWidthDrainN = tech.featureSize * modified_MIN_GAP_BET_GATE_POLY_FINFET;
                 unitWidthSourceN = unitWidthDrainN;
                 heightDrainN =  NumNSheet * modified_NwidthFin;
             } else {    /* Folding */
                 numFoldedNMOS = (int)(ceil(NumNSheet / maxNumNSheet));
-                unitWidthDrainN = (int)ceil((double)(numFoldedNMOS+1)/2) * tech.featureSize * MIN_GAP_BET_GATE_POLY_FINFET;
-                unitWidthSourceN = (int)floor((double)(numFoldedNMOS+1)/2) * tech.featureSize * MIN_GAP_BET_GATE_POLY_FINFET;
+                unitWidthDrainN = (int)ceil((double)(numFoldedNMOS+1)/2) * tech.featureSize * modified_MIN_GAP_BET_GATE_POLY_FINFET;
+                unitWidthSourceN = (int)floor((double)(numFoldedNMOS+1)/2) * tech.featureSize * modified_MIN_GAP_BET_GATE_POLY_FINFET;
                 heightDrainN = maxNumNSheet * modified_NwidthFin; // modified from heightDrainN = (maxNumNFin-1) * tech.PitchFin + 2 * tech.widthFin/2;
             }
         } else {
