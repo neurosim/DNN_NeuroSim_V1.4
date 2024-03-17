@@ -240,10 +240,10 @@ void Adder::CalculatePower(double numRead, int numAdderPerOperation) {
 		/* Leakage power */
 		if ((tech.featureSize == 2e-9) && param->speciallayout) { 
 				/* Leakage power */
-		leakage += CalculateGateLeakage(NAND, 2, MIN_NMOS_SIZE * tech.featureSize, MIN_NMOS_SIZE * tech.featureSize, inputParameter.temperature, tech) * tech.vdd * 9 * numBit * numAdder * 2/3; }
+		leakage += CalculateGateLeakage(NAND, 2, MIN_NMOS_SIZE * tech.featureSize, MIN_NMOS_SIZE * tech.featureSize, inputParameter.temperature, tech) * tech.vdd * 9 * numBit * numAdder * 1; }
 	    else if ((tech.featureSize == 1e-9) && param->speciallayout) {
 				/* Leakage power */
-		leakage += CalculateGateLeakage(NAND, 2, MIN_NMOS_SIZE * tech.featureSize, MIN_NMOS_SIZE * tech.featureSize, inputParameter.temperature, tech) * tech.vdd * 9 * numBit * numAdder * 2/3;}
+		leakage += CalculateGateLeakage(NAND, 2, MIN_NMOS_SIZE * tech.featureSize, MIN_NMOS_SIZE * tech.featureSize, inputParameter.temperature, tech) * tech.vdd * 9 * numBit * numAdder * 1;}
 		else {
 				/* Leakage power */
 		leakage += CalculateGateLeakage(NAND, 2, widthNandN, widthNandP, inputParameter.temperature, tech) * tech.vdd * 9 * numBit * numAdder;
