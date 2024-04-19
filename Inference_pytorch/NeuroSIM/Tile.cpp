@@ -489,12 +489,12 @@ void TileCalculatePerformance(const vector<vector<double> > &newMemory, const ve
 						vector<vector<double> > pEInput;
 						pEInput = CopyPEInput(inputVector, i*peSize, numInVector, numRowMatrix);
 						// Anni update
-
-			// Anni update: PEleakageSRAMInUse
-			ProcessingUnitCalculatePerformance(subArrayInPE, pEMemory, pEMemory, pEInput, 1, 1, numSubArrayRow, numSubArrayCol, weightMatrixRow/numPE,
-									weightMatrixCol, numInVector, cell, false, &PEreadLatency, &PEreadDynamicEnergy, &PEleakage, &PEleakageSRAMInUse,
-									&PEbufferLatency, &PEbufferDynamicEnergy, &PEicLatency, &PEicDynamicEnergy, 
-									&peLatencyADC, &peLatencyAccum, &peLatencyOther, &peEnergyADC, &peEnergyAccum, &peEnergyOther, CalculateclkFreq, clkPeriod);
+						
+						// Anni update: PEleakageSRAMInUse
+						ProcessingUnitCalculatePerformance(subArrayInPE, pEMemory, pEMemory, pEInput, 1, 1, numSubArrayRow, numSubArrayCol, numRowMatrix,
+												numColMatrix, numInVector, cell, false, &PEreadLatency, &PEreadDynamicEnergy, &PEleakage, &PEleakageSRAMInUse,
+												&PEbufferLatency, &PEbufferDynamicEnergy, &PEicLatency, &PEicDynamicEnergy, 
+												&peLatencyADC, &peLatencyAccum, &peLatencyOther, &peEnergyADC, &peEnergyAccum, &peEnergyOther, CalculateclkFreq, clkPeriod);
 
 					}
 					*readLatency = max(PEreadLatency, (*readLatency));
