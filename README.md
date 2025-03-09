@@ -4,6 +4,13 @@ The DNN+NeuroSim framework was developed by [Prof. Shimeng Yu's group](https://s
 
 :star2: This is the released version 1.4 (August 1, 2023) for the tool, and this version has **_improved following inference engine estimation_**:
 
+
+If you use the tool or adapt the tool in your work or publication, you are required to cite the following reference:
+
+* J. Lee, A. Lu, W. Li, S. Yu, ※NeuroSim V1. 4: Extending Technology Support for Digital Compute-in-Memory Toward 1nm Node, *§ IEEE Transactions on Circuits and Systems I: Regular Papers, 2024.*
+https://ieeexplore.ieee.org/abstract/document/10443264?casa_token=FK98oN4tvxMAAAAA:RVAOa61R7fUYEtuAEePoMh8eJoN3E8jSZgVcaKWJq12gB04PoUieQXYBmdSGCklyPZ9QWXm6 
+
+
 ## 1. Support for technology scaling down to 1nm node in the hardware estimation framework (C++ code).
 ```
 The following is a list of the supported nodes with key features:
